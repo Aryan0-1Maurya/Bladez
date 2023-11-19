@@ -4,7 +4,7 @@ Welcome to Bladez, an action-packed game where you wield powerful blades in epic
 
 ## Play the Game
 
-[Play Now]( https://aryan0-1maurya.github.io/bladez-game/) 🕹️
+[Play Now]( https://aryan0-1maurya.github.io/Bladez/) 🕹️
 
 ## About the Game
 
