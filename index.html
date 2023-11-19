@@ -1,0 +1,3149 @@
+<!-- 
+
+      ************************************************************
+      
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta name="author" content="Aryan Maurya" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="favicon.png" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <meta
+          name="description"
+          content="This is online ⚔βⱢΛĐΣ⚔ game build for your imporove thing skill in this domain by aryan maurya enjoy your game"
+        />
+        <meta
+          name="keywords"
+          content="⚔βⱢΛĐΣ⚔games,⚔βⱢΛĐΣ⚔games,blades games,fight games,bladder games,shoot games,blender game,stickman game,online fight gamews,canvas games,canvas gamesh fight,geen shock games,hight fit gam,es,blader geen shok games,omnline fight,hero gam,es, game by aryan , aryan sir, aryan sir game"
+        />
+        <title>⚔βⱢΛĐΣ⚔</title>
+        <link href="https://fonts.googleapis.com/css?family=Shojumaru|Merriweather|Roboto+Mono|Lexend+Deca" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            canvas {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <canvas id="game" width="600px" height="600px"></canvas>
+        <!-- AmsR Ghost's HTML Canvas Library -->
+        <script>
+            Swal.fire({
+        icon: 'info',
+        title: 'Orignally this game is build by AmsR Ghost ~me update',
+        showConfirmButton: false,
+        timer: 1500
+      })
+        </script>
+        <script>
+            // Get the body element.
+            var body = document.getElementById("body");
+            
+            // Gets the canvas element and allows the user to draw on the canvas.
+            var canvas = document.getElementById("game");
+            var ctx = canvas.getContext("2d");
+            
+            // Variables hold the width and height of the canvas.
+            var width = canvas.width;
+            var height = canvas.height;
+            
+            // Controls whether to draw the stroke or fill
+            var isStroke = true;
+            var isFill = true;
+            
+            // A draw function for animation.
+            function draw() {};
+            
+            // A keyPressed function for key events.
+            function keyPressed() {};
+            
+            // A keyReleased function for key events.
+            function keyReleased() {};
+            
+            // A keyPressed function for when the user clicks.
+            function mouseClicked() {};
+            
+            // The frameRate variable controls animation speed.
+            var frameRate = 60;
+            
+            // Counts frames.
+            var frameCount = 0;
+            
+            // Positions of the mouse.
+            var mouseX = width / 2, mouseY = height / 2;
+            
+            // A keyCode variable.
+            var keyCode;
+            
+            // Key code variables.
+            var LEFT = 37,
+                RIGHT = 39,
+                UP = 38,
+                DOWN = 40;
+                
+            // Alignment variables.
+            var TOP = 0,
+                CENTER = 1,
+                BOTTOM = 2,
+                BASELINE = 3
+                
+            // Aligment objects.
+            var alignmentX = {
+                37 : "left",
+                1 : "center",
+                39 : "right",
+            };
+            var alignmentY = {
+                0 : "top",
+                1 : "middle",
+                2 : "bottom",
+                3 : "baseline"
+            };
+                
+            // Holds current text size.
+            var txtSize = 20, ext = "", txtLead = 1;
+            
+            var mainFont = "sans-serif";
+            
+            /** Makes functions similar to the Processing JS functions. **/
+            // Returns a random number in a certain range.
+            function random(min, max) {
+                if (!min) {
+                    return Math.random();
+                }
+                if (!max) {
+                    max = min;
+                    min = 0;
+                }
+                return min + Math.random() * (max - min);
+            };
+            
+            // Returns a number from a certain range.
+            function lerp(num1, num2, amount) {
+                return num1 + (num2 - num1) * amount;
+            };
+            
+            // Maps a number from one range to another.
+            function map(num, start1, stop1, start2, stop2) {
+                return start2 + (num - start1) / stop1 * stop2;
+            };
+            
+            // Constrains a number to a certain range.
+            function constrain(num, min, max) {
+                let min2 = min;
+                let max2 = max;
+                if (min > max) {
+                    min2 = max;
+                    max2 = min;
+                }
+                return Math.max(Math.min(num, max), min);
+            };
+            
+            // Finds the distance between two points.
+            function dist(x1, y1, x2, y2) {
+                return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+            };
+        
+            // Makes a color (returns a string).
+            function color(r, g, b, a) {
+                a = a === undefined ? 255 : a;
+                r = Math.floor(r);
+                g = Math.floor(g);
+                b = Math.floor(b);
+                if (arguments.length === 0) {
+                    r = 0;
+                    g = 0;
+                    b = 0;
+                } else if (arguments.length === 1 || arguments.length === 2) {
+                    g = r;
+                    b = r;
+                }
+                if (arguments.length === 2) {
+                    a = g;
+                }
+                r = constrain(r, 0, 255);
+                g = constrain(g, 0, 255);
+                b = constrain(b, 0, 255);
+                a = constrain(a, 0, 255);
+                return a << 24 | r << 16 | g << 8 | b;
+            };
+            
+            // Returns the red value of a color.
+            function red(color) {
+                return (color >> 16) & 0xFF;
+            };
+            
+            // Returns the green value of a color.
+            function green(color) {
+                return (color >> 8) & 0xFF;
+            };
+            
+            // Returns the blue value of a color.
+            function blue(color) {
+                return color & 0xFF;
+            };
+            
+            // Returns the opactiy of a color.
+            function a(color) {
+                return (color >> 24) & 0xFF;
+            };
+            
+            // Returns a string value color.
+            function getUsableColor(c) {
+                if (typeof c === "string") {
+                    return getColor(c);
+                } else if (typeof c === "number") {
+                    if (c > 0) {
+                        return getColor(color(c));
+                    }
+                    return c;
+                } else {
+                    return c;
+                }
+            };
+            
+            // Return a color inbetween two colors.
+            function lerpColor(c1, c2, amount) {
+                c1 = getUsableColor(c1);
+                c2 = getUsableColor(c2);
+                return color(lerp(red(c1), red(c2), amount), lerp(green(c1), green(c2), amount), lerp(blue(c1), blue(c2), amount), lerp(a(c1), a(c2), amount));
+            };
+            
+            // Used for getting a color from a color object.
+            function getColor(n1, n2, n3, n4) {
+                if (n1 === undefined) {
+                    n1 = 0;
+                    n2 = 0;
+                    n3 = 0;
+                    n4 = 1;
+                } else if (n2 === undefined) {
+                    if (n1.isGrad) {
+                        return n1.grad;
+                    }
+                    if (n1 < 0) {
+                        let c = n1;
+                        n1 = red(c);
+                        n2 = green(c);
+                        n3 = blue(c);
+                        n4 = a(c) / 255;
+                    } else {
+                        n2 = n1;
+                        n3 = n1;
+                        n4 = 1;
+                    }
+                } else if (n3 === undefined) {
+                    if (typeof n1 !== "number") {
+                        let c = n1;
+                        n4 = n2 / 255;
+                        n1 = red(c);
+                        n2 = green(c);
+                        n3 = blue(c);
+                    } else {
+                        n2 = n1;
+                        n3 = n1;
+                        n4 = n2 / 255;
+                    }
+                } else if (n4 === undefined) {
+                    n4 = 1;
+                } else {
+                    n4 /= 255;
+                }
+                return "rgba(" + Math.round(n1) + ", " + Math.round(n2) + ", " + Math.round(n3) + ", " + n4 + ")";
+            };
+            
+            // Sets fill color.
+            function fill(r, g, b, a) {
+                isFill = true;
+                ctx.fillStyle = getColor(r, g, b, a);
+            };
+            
+            // Sets stroke color.
+            function stroke(r, g, b, a) {
+                isStroke = true;
+                ctx.strokeStyle = getColor(r, g, b, a);
+            };
+            
+            // Gets rid of stroke.
+            function noStroke() {
+                isStroke = false;
+            };
+            
+            // Gets rid of fill.
+            function noFill() {
+                isFill = false;
+            };
+            
+            // A sine function that converts from radians to degrees.
+            function sin(angle) {
+                return Math.sin(angle / 180 * Math.PI);
+            };
+            
+            // A cosine function that converts from radians to degrees.
+            function cos(angle) {
+                return Math.cos(angle / 180 * Math.PI);
+            };
+            
+            // An atan2 function.
+            function atan2(x, y) {
+                return Math.atan2(x, y) / Math.PI * 180;
+            };
+            
+            // Translates to a certain point.
+            function translate(x, y) {
+                ctx.translate(x, y);
+            };
+            
+            // Scales the drawing.
+            function scale(w, h) {
+                if (h === undefined) {
+                    ctx.scale(w, w);
+                    return;
+                }
+                ctx.scale(w, h);
+            };
+            
+            // Rotates the drawing.
+            function rotate(angle) {
+                ctx.rotate(angle / 180 * Math.PI)
+            };
+            
+            // Starts transformation.
+            function pushMatrix() {
+                ctx.save();
+            };
+            
+            // Finishes transformation.
+            function popMatrix() {
+                ctx.restore();
+            };
+            
+            // Sets the width of lines.
+            function strokeWeight(width) {
+                ctx.lineWidth = width;
+            };
+            
+            // Starts a complex shape.
+            function beginShape() {
+                ctx.beginPath();
+            };
+            
+            // Closes a complex shape.
+            function endShape() {
+                if (isFill) {
+                    ctx.fill();
+                }
+                if (isStroke) {
+                    ctx.stroke();
+                }
+            };
+            
+            // Sets the position of the path.
+            function setPath(x, y) {
+                ctx.moveTo(x, y);
+            };
+            
+            // Draws a vertex for a complex shape.
+            function vertex(x, y) {
+                ctx.lineTo(x, y);
+            };
+            
+            // Draws a curve vertex for a complex shape.
+            function curveVertex(cx, cy, x, y) {
+                ctx.quadraticCurveTo(cx, cy, x, y);
+            };
+            
+            // Draws a bezier vertex for a complex shape.
+            function bezierVertex(cx1, cy1, cx2, cy2, x, y) {
+                ctx.bezierCurveTo(cx1, cy1, cx2, cy2, x, y);
+            };
+            
+            // Draws a curve.
+            function curve(x1, y1, cx, cy, x2, y2) {
+                beginShape();
+                setPath(x1, y1);
+                curveVertex(cx, cy, x2, y2);
+                endShape();
+            };
+            
+            // Draws a bezier.
+            function bezier(x1, y1, cx1, cy1, cx2, cy2, x2, y2) {
+                beginShape();
+                setPath(x1, y1);
+                bezierVertex(cx1, cy1, cx2, cy2, x2, y2);
+                endShape();
+            };
+            
+            // Draws a line.
+            function line(x1, y1, x2, y2) {
+                beginShape();
+                vertex(x1, y1);
+                vertex(x2, y2);
+                endShape();
+            };
+            
+            // Draws a rectangle.
+            function rect(x, y, w, h, r, r2, r3, r4) {
+                r = r || 0;
+                r = constrain(r, -Math.min(w, h) / 2, Math.min(w, h) / 2);
+                if (r2 === undefined || r3 === undefined || r4 === undefined) {
+                    r2 = r;
+                    r3 = r;
+                    r4 = r;
+                }
+                r2 = constrain(r2, -Math.min(w, h) / 2, Math.min(w, h) / 2);
+                r3 = constrain(r3, -Math.min(w, h) / 2, Math.min(w, h) / 2);
+                r4 = constrain(r4, -Math.min(w, h) / 2, Math.min(w, h) / 2);
+                beginShape();
+                setPath(x, y + r);
+                curveVertex(x, y, x + r, y);
+                vertex(x + w - r2, y);
+                curveVertex(x + w, y, x + w, y + r2);
+                vertex(x + w, y + h - r3);
+                curveVertex(x + w, y + h, x + w - r3, y + h);
+                vertex(x + r4, y + h);
+                curveVertex(x, y + h, x, y + h - r4);
+                vertex(x, y + r);
+                endShape();
+            };
+            
+            // Draws an arc.
+            function arc(x, y, w, h, start, stop) {
+                w = Math.abs(w);
+                h = Math.abs(h);
+                pushMatrix();
+                beginShape();
+                translate(x, y);
+                scale(1, h / w);
+                ctx.arc(0, 0, w / 2, start / 180 * Math.PI, stop / 180 * Math.PI);
+                endShape();
+                popMatrix();
+            };
+            
+            // Draws an ellipse.
+            function ellipse(x, y, w, h) {
+                arc(x, y, w, h, 0, 360);
+            };
+            
+            // Draws a triangle.
+            function triangle(x1, y1, x2, y2, x3, y3) {
+                beginShape();
+                vertex(x1, y1);
+                vertex(x2, y2);
+                vertex(x3, y3);
+                vertex(x1, y1);
+                endShape();
+            };
+            
+            // Draws a quad.
+            function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
+                beginShape();
+                vertex(x1, y1);
+                vertex(x2, y2);
+                vertex(x3, y3);
+                vertex(x4, y4);
+                vertex(x1, y1);
+                endShape();
+            };
+            
+            // Fills the background.
+            function background(r, g, b, a) {
+                let prev = ctx.fillStyle;
+                var wasStroke;
+                if (isStroke) {
+                    wasStroke = true;
+                    isStroke = false;
+                }
+                fill(r, g, b, a);
+                ctx.fillRect(0, 0, width, height);
+                fill(prev);
+                if (wasStroke) {
+                    isStroke = true;
+                }
+            };
+            
+            // Sets text font.
+            function textFont(font, size) {
+                ext = "";
+                if (font.toLowerCase().match(" small-caps")) {
+                    font = font.substring(0, font.length - 11);
+                    ext += "small-caps ";
+                }
+                if (font.toLowerCase().match(" italic")) {
+                    font = font.substring(0, font.length - 7);
+                    ext += "Italic ";
+                }
+                if (font.toLowerCase().match(" bold")) {
+                    font = font.substring(0, font.length - 5);
+                    ext += "Bold ";
+                } else if (font.toLowerCase().match(" black")) {
+                    font = font.substring(0, font.length - 6);
+                    ext += "Bolder ";
+                } else if (font.toLowerCase().match(" thin")) {
+                    font = font.substring(0, font.length - 5);
+                    ext += "Lighter ";
+                } else if (font.toLowerCase().match(" light")) {
+                    font = font.substring(0, font.length - 6);
+                    ext += "Lighter ";
+                }
+                size = size || txtSize;
+                txtSize = size;
+                mainFont = font;
+                ctx.font = ext + txtSize + "px " + mainFont;
+            };
+            
+            // Sets text size.
+            function textSize(size) {
+                txtSize = size || 20;
+                ctx.font = ext + txtSize + "px " + mainFont;
+            };
+            
+            // Sets text alignment.
+            function textAlign(align, baseline) {
+                ctx.textAlign = alignmentX[align];
+                ctx.textBaseline = alignmentY[baseline];
+            };
+            
+            // Draws text.
+            function text(txt, x, y) {
+                if (typeof txt !== "string") {
+                    txt = txt.toString();
+                }
+                var txtList = [""];
+                for (var i = 0; i < txt.length; i++) {
+                    if (txt.charAt(i) === "\n") {
+                        txtList.push("");
+                    } else {
+                        txtList[txtList.length - 1] += txt.charAt(i);
+                    }
+                }
+                for (var i = 0; i < txtList.length; i++) {
+                    if (isFill) {
+                        ctx.fillText(txtList[i], x, y - (ctx.textBaseline === "middle" ? txtList.length * txtSize * txtLead / 2 : ctx.textBaseline === "bottom" ? txtList.length * txtSize * txtLead : 0) + (i + (ctx.textBaseline === "middle" ? 0.5 : ctx.textBaseline === "bottom" ? 1 : 0)) * txtSize * txtLead);
+                    }
+                    if (isStroke) {
+                        ctx.strokeText(txtList[i], x, y - txtList.length * txtSize * txtLead / 2 + (i + 0.5) * txtSize * txtLead);
+                    }
+                }
+            };
+            
+            // Changes txtLead variable
+            function textLeading(amount) {
+                txtLead = amount / 10;
+            };
+            
+            // Changes the cursor.
+            function cursor(name) {
+                document.body.style.cursor = name;
+            };
+            
+            // Changes the a line's cap.
+            function strokeCap(cap) {
+                ctx.lineCap = "round";
+            };
+            
+            // Creates a gradient.
+            var createGradient = function(x1, y1, x2, y2) {
+                return {isGrad: true, grad: ctx.createLinearGradient(x1, y1, x2, y2)};
+            };
+            
+            // Adds a color to a gradient.
+            var addColor = function(gradient, amount, color) {
+                gradient.grad.addColorStop(amount, getColor(color));
+            };
+            
+            // Draws an iamge on the canvas.
+            function image(imageName, x, y, w, h) {
+                w = w || imageName.width;
+                h = h || imageName.height;
+                ctx.drawImage(imageName, x, y, w, h);
+            };
+            
+            // My own function to create images.
+            var getImage = function(shapes, width, height) {
+                let canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                canvas.display = "none";
+                
+                let prevContext = ctx;
+                ctx = canvas.getContext("2d");
+                
+                shapes();
+                
+                ctx = prevContext;
+                
+                return canvas;
+            };
+            
+            // Moves the mouseX and mouseY variables.
+            document.body.addEventListener("mousemove", function(event) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+            }, false);
+            
+            // Moves the mouseX and mouseY variables.
+            document.body.addEventListener("touchmove", function(event) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+            }, false);
+            
+            // Checks for key pressed events.
+            body.addEventListener("keydown", function(event) {
+                event.preventDefault();
+                keyCode = event.keyCode;
+                keyPressed();
+            }, false);
+            
+            // Checks for key released events.
+            body.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                keyCode = event.keyCode;
+                keyReleased();
+            }, false);
+            
+            // Checks for when the mouse is clicked.
+            body.addEventListener("mouseup", function(event) {
+                mouseClicked();
+            }, false);
+            
+            // Checks for when the mouse is clicked.
+            body.addEventListener("touchend", function(event) {
+                mouseClicked();
+            }, false);
+            
+            // Uses the draw function and frameRate variable.
+            var intervalId = setInterval(function() {
+                frameCount ++;
+                draw()
+            }, 1000 / frameRate);
+        </script>
+        
+        <!-- Script tag for the JavaScript in the game -->
+        <script>
+            /** Game code **/
+            // Name of the game.
+            var programName = document.getElementsByTagName("title")[0].innerHTML;
+            
+            // Ground color
+            var groundColors = [
+                color(80, 120, 60),
+                color(70, 120, 90),
+                color(150, 40, 10),
+                color(150, 140, 90),
+                color(50, 10, 100)
+            ];
+            var groundColor = groundColors[0];
+            
+            // Important variables.
+            var click, overButton, scene, keys = {};
+            
+            var grid = getImage(function() {
+                background(255, 255, 255, 0);
+                stroke(0, 0, 0, 50);
+                strokeWeight(2);
+                for (var i = 0; i < 20; i++) {
+                    line(i * 30, 0, i * 30, height);
+                    line(0, i * 30, width, i * 30);
+                }
+            }, 600, 600);
+            
+            var brick = getImage(function() {
+                background(255, 255, 255, 0);
+                noStroke();
+                fill(80, 80, 80);
+                rect(0, 0, 100, 100, 10);
+                fill(60, 60, 60);
+                ellipse(50, 100, 50, 50);
+                ellipse(30, 100, 40, 20);
+                ellipse(80, 80, 40, 40);
+                rect(80, 50, 20, 30, 10);
+                rect(80, 80, 20, 20, 10);
+                ellipse(100, 50, 30, 30);
+                fill(255, 255, 255, 20);
+                rect(10, 10, 80, 10, 10);
+                rect(5, 20, 40, 5, 5);
+                rect(20, 40, 20, 5);
+                ellipse(70, 60, 35, 35);
+                ellipse(50, 80, 15, 15);
+            }, 100, 100);
+            
+            // Smooth motion
+            smooth = function(pos, dest, div) {
+                return (dest - pos) / div;
+            };
+
+            // Fonts for the game
+            var fonts = [
+                "Merriweather",
+                "Roboto Mono",
+                "Shojumaru",
+                "Lexend Deca"
+            ];
+            
+            // Scene transition
+            var sceneChanger = (function() {
+                sceneChanger = {};
+                
+                sceneChanger.x = -600;
+                sceneChanger.mode = 1;
+                sceneChanger.scene = menu;
+                
+                sceneChanger.pack = function() {
+                    noStroke();
+                    if (this.mode === 0) {
+                        if (this.x > -300) {
+                            this.x += smooth(this.x, 0, 8);
+                        } else {
+                            this.x -= smooth(this.x, -650, 8);
+                        }
+                        if (this.x > -1) {
+                            this.mode = 1;
+                            scene = this.scene;
+                        }
+                    } else {
+                        if (this.x > -300) {
+                            this.x -= smooth(this.x, 50, 8);
+                        } else {
+                            this.x += smooth(this.x, -600, 8);
+                        }
+                    }
+                    
+                    fill(100, 100, 105);
+                    triangle(this.x, 0, this.x, height, this.x + width + 2, height);
+                    triangle(width - this.x, 0, width - this.x, height, -this.x - 2, 0);
+                    fill(0, 0, 30, 50);
+                    triangle(this.x, height / 5, this.x, height, this.x + width / 5 * 4 + 2, height);
+                    triangle(width - this.x, 0, width - this.x, height / 5 * 4, -this.x - 2 + width / 5, 0);
+                    ellipse(this.x + 150, 350, 40, 40);
+                    ellipse(this.x + 180, 400, 25, 25);
+                    ellipse(this.x + 120, 460, 10, 10);
+                    ellipse(350 - this.x, 150, 30, 30);
+                    ellipse(550 - this.x, 190, 20, 20);
+                };
+                
+                sceneChanger.reset = function(scene) {
+                    if (this.mode === 0) {
+                        return;
+                    }
+                    this.mode = 0;
+                    this.scene = scene;
+                    this.x = -600;
+                };
+                
+                return sceneChanger;
+            })();
+
+            // Draws three circles to add some highlighting.
+            function ball(x, y, s) {
+                ellipse(x, y, s, s);
+                noStroke();
+                fill(255, 255, 255, 40);
+                ellipse(x + s * 0.04, y - s * 0.04, s * 0.85, s * 0.85);
+                ellipse(x + s * 0.2, y - s * 0.2, s * 0.2, s * 0.2);
+            };
+            
+            // Draws arrows
+            function drawArrow(x, y, size, r, level) {
+                pushMatrix();
+                translate(x, y);
+                scale(size / 100, size / 100);
+                rotate(r);
+                noStroke();
+                switch(level) {
+                    case 0:
+                        translate(0, -40);
+                        fill(100, 100, 105);
+                        triangle(0, 0, -5, 20, 5, 20);
+                        fill(160, 0, 30);
+                        beginShape();
+                        vertex(0, 55);
+                        bezierVertex(-10, 60, -10, 90, -2, 65);
+                        vertex(2, 65);
+                        bezierVertex(10, 90, 10, 60, 0, 55);
+                        endShape();
+                        fill(170, 120, 80);
+                        rect(-2, 20, 4, 45);
+                        fill(255, 255, 245, 50);
+                        triangle(0, 0, -5, 20, 0, 20);
+                        rect(-2, 20, 2, 45);
+                        beginShape();
+                        vertex(0, 55);
+                        bezierVertex(-10, 60, -10, 90, -2, 65);
+                        endShape();
+                        break;
+                    case 1:
+                        pushMatrix();
+                        for (var i = 0; i < 4; i++) {
+                            fill(100, 100, 105);
+                            triangle(0, -20, -5, 0, 5, 0);
+                            fill(255, 255, 245, 50);
+                            triangle(0, -20, -5, 0, 0, 0);
+                            rotate(90);
+                        }
+                        popMatrix();
+                        fill(100, 100, 105);
+                        ellipse(0, 0, 10, 10);
+                        fill(0, 0, 50, 50);
+                        ellipse(0, 0, 5, 5);
+                        break;
+                    case 2:
+                        fill(100, 100, 105);
+                        quad(0, -20, -10, 10, 0, 0, 10, 10);
+                        fill(255, 255, 245, 50);
+                        triangle(0, -20, -10, 10, 0, 0);
+                        break;
+                    case 3:
+                        fill(255, 120, 20);
+                        ellipse(0, -3, 35, 45);
+                        rect(-17, -0, 8, 30 + sin(frameCount * 8) * 5, 10);
+                        rect(-4, -0, 8, 40 + sin(frameCount * 8) * 5, 10);
+                        rect(9, -0, 8, 25 + sin(frameCount * 8) * 5, 10);
+                        fill(255, 255, 245, 50);
+                        ellipse(0, -3, 25, 35);
+                        fill(100, 100, 105);
+                        quad(0, -20, -10, 10, 0, 0, 10, 10);
+                        fill(255, 255, 245, 50);
+                        triangle(0, -20, -10, 10, 0, 0);
+                        break;
+                }
+                popMatrix();
+            };
+            
+            // Draws cannonballs
+            function drawCannonball(x, y, size, r, level) {
+                pushMatrix();
+                translate(x, y);
+                scale(size / 100, size / 100);
+                rotate(r);
+                noStroke();
+                switch(level) {
+                    case 1:
+                    case 2:
+                        if (level === 1) {
+                            fill(255, 0, 50, 100);
+                        } else {
+                            fill(255, 130, 0, 100);
+                            ellipse(5, 5, 30, 30);
+                        }
+                        ellipse(0, 0, 40, 40);
+                    case 0:
+                        fill(50, 50, 60);
+                        ball(0, 0, 30);
+                        break;
+                    case 3:
+                        fill(255, 130, 20);
+                        ellipse(0, -3, 40, 40);
+                        rect(-20, -0, 8, 30 + sin(frameCount * 8) * 5, 10);
+                        rect(-4, -0, 8, 40 + sin(frameCount * 8) * 5, 10);
+                        rect(12, -0, 8, 25 + sin(frameCount * 8) * 5, 10);
+                        fill(255, 110, 20);
+                        ball(0, -3, 30, 30);
+                        break;
+                    case 4:
+                        fill(100, 190, 255, 100);
+                        ellipse(0, 0, 25, 25);
+                        ellipse(3, -3, 15, 15);
+                        stroke(100, 190, 255, 200);
+                        noFill();
+                        for (var i = 0; i < 4; i++) {
+                            strokeWeight(2 + i / 4);
+                            ellipse(0, 0, 10 + i * 7 + random(-3, 3), 10 + i * 7 + random(-3, 3));
+                        }
+                        break;
+                }
+                popMatrix();
+            };
+            
+            // Draws the player
+            function drawPlayer(x, y, size, side, angle, hand1Ang, hand2Ang) {
+                pushMatrix();
+                noStroke();
+                translate(x, y);
+                fill(220, 190, 150);
+                ball(0, 0, size);
+                fill(220, 190, 150);
+                ball(sin(angle + hand1Ang + 225) * size / 1.4, -cos(angle + hand1Ang + 225) * size / 1.4, size / 3);
+                fill(220, 190, 150);
+                ball(sin(angle + hand2Ang + 135) * size / 1.4, -cos(angle + hand2Ang + 135) * size / 1.4, size / 3);
+                fill(220, 190, 150);
+                if (side === "front") {
+                    fill(0, 0, 0);
+                    rect(size / 6 - size / 20, -size / 10, size / 10, size / 4, size / 30);
+                    rect(-size / 6 - size / 20, -size / 10, size / 10, size / 4, size / 30);
+                    fill(255, 255, 255, 70);
+                    rect(size / 6 - size / 45, -size / 12, size / 15, size / 8, size / 30);
+                    rect(-size / 6 - size / 45, -size / 12, size / 15, size / 8, size / 30);
+                }
+                popMatrix();
+            };
+            
+            // Draws mobs
+            function drawMob(x, y, size, side, angle, color, level) {
+                pushMatrix();
+                translate(x, y);
+                noStroke();
+                rotate(angle);
+                if (side === "front") {
+                    if (level === 1) {
+                        fill(color);
+                        pushMatrix();
+                        translate(sin(270) * size / 2, -cos(270) * size / 1.6);
+                        rotate(-20);
+                        rect(-size / 6, -size / 6, size / 3, size / 3);
+                        popMatrix();
+                        pushMatrix();
+                        translate(sin(90) * size / 2, -cos(90) * size / 1.6);
+                        rotate(20);
+                        rect(-size / 6, -size / 6, size / 3, size / 3);
+                        popMatrix();
+                    }                
+                    if (level === 2) {
+                        fill(color);
+                        beginShape();
+                        vertex(0, -size / 4);
+                        bezierVertex(-size / 2, 0, -size / 3, -size / 2, -size / 4, -size * 1.2);
+                        vertex(size / 4, -size * 1.2);
+                        bezierVertex(size / 3, -size / 2, size / 2, 0, 0, -size / 4);
+                        endShape();
+                    }
+                    if (level < 3) {
+                        popMatrix();
+                        fill(color);
+                        ball(x, y, size / (level === 2 ? 1.3 : 1));
+                        pushMatrix();
+                        translate(x, y);
+                        rotate(angle);
+                    }
+                    switch(level) {
+                        case 1:
+                            stroke(0, 0, 0);
+                            strokeWeight(size / 20);
+                            line(-size / 15, -size / 8, -size / 3.8, size / 10);
+                            line(size / 15, -size / 8, size / 3.8, size / 10);
+                            noStroke();
+                            fill(255, 0, 0);
+                            ellipse(-size / 6, -size / 50, size / 15, size / 6);
+                            ellipse(size / 6, -size / 50, size / 15, size / 6);
+                        case 0:
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(40 + sin(frameCount * 2 + x + y) * 5) * size / 1.4, -cos(40 + sin(frameCount * 2 + x + y) * 5) * size / 1.4);
+                            rotate(-angle);
+                            ball(0, 0, size / 3);
+                            popMatrix();
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(-40 - sin(frameCount * 2 + x + y) * 5) * size / 1.4, -cos(-40 - sin(frameCount * 2 + x + y) * 5) * size / 1.4);
+                            rotate(-angle);
+                            ball(0, 0, size / 3);
+                            popMatrix();
+                            stroke(0, 0, 0);
+                            strokeWeight(size / 20);
+                            line(-size / 15, -size / 8, -size / 3.5, 0);
+                            line(size / 15, -size / 8, size / 3.5, 0);
+                            noStroke();
+                            break;
+                        case 2:
+                            pushMatrix();
+                            translate(0, -size / 5);
+                            noFill();
+                            strokeWeight(size / 10);
+                            stroke(color);
+                            pushMatrix();
+                            rotate(-30 + sin(frameCount * 2 + x + y) * 5);
+                            bezier(-size / 3, -size / 3, -size / 2, -size / 2, -size / 2, -size / 1.5, -size / 2, -size / 1.5);
+                            popMatrix();
+                            pushMatrix();
+                            rotate(30 - sin(frameCount * 2 + x + y) * 5);
+                            bezier(size / 3, -size / 3, size / 2, -size / 2, size / 2, -size / 1.5, size / 2, -size / 1.5);
+                            popMatrix();
+                            noStroke();
+                            fill(color);
+                            pushMatrix();
+                            rotate(-30 + sin(frameCount * 2 + x + y) * 5);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2.5, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 1.7, -size / 0.9);
+                            popMatrix();
+                            pushMatrix();
+                            rotate(30 - sin(frameCount * 2 + x + y) * 5);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2.5, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 1.7, -size / 0.9);
+                            popMatrix();
+                            popMatrix();
+                            pushMatrix();
+                            scale(1 / 1.3, 1 / 1.3);
+                            fill(150, 220, 255);
+                            ellipse(size / 5, size / 20, size / 4, size / 4);
+                            ellipse(-size / 5, size / 20, size / 3.5, size / 6);
+                            fill(255, 255, 150);
+                            ellipse(size / 5, size / 20, size / 6, size / 6);
+                            ellipse(-size / 5, size / 20, size / 6, size / 12);
+                            fill(255, 120, 150);
+                            ellipse(size / 5, size / 20, size / 11, size / 11);
+                            ellipse(-size / 5, size / 20, size / 11, size / 20);
+                            popMatrix();
+                            break;
+                        default:
+                            noFill();
+                            strokeWeight(size / 10);
+                            stroke(color);
+                            bezier(-size / 3, -size / 2.6, -size / 5, -size / 2, -size / 1.8, -size / 1.5, -size / 2, -size / 1.4);
+                            bezier(size / 3, -size / 2.6, size / 5, -size / 2, size / 1.8, -size / 1.5, size / 2, -size / 1.4);
+                            noStroke();
+                            fill(color);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 1.7, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 1.7, -size / 0.9);
+                            popMatrix();
+                            pushMatrix();
+                            translate(x, y);
+                            rotate(angle + 180);
+                            scale(1, 0.8);
+                            fill(color);
+                            triangle(-size / 2, -size / 1.5, -size / 3, -size / 5, -size / 4.5, -size / 5);
+                            triangle(-size / 6, -size / 2.5, -size / 3, -size / 2, -size / 3.5, -size / 3);
+                            triangle(size / 2, -size / 1.5, size / 3, -size / 5, size / 4.5, -size / 5);
+                            triangle(size / 6, -size / 2.5, size / 3, -size / 2, size / 3.5, -size / 3);
+                            ball(0, 0, size);
+                            popMatrix();
+                            pushMatrix();
+                            translate(x, y);
+                            rotate(angle + 180);
+                            scale(0.7, 1);
+                            fill(color);
+                            ball(0, -size / 3, size / 2.5);
+                            fill(255, 0, 0);
+                            arc(-size / 10, -size / 3, size / 8, size / 15, 20, 200);
+                            arc(size / 10, -size / 3, size / 8, size / 15, -20, 160);
+                            arc(-size / 8, -size / 2.6, size / 12, size / 20, 20, 200);
+                            arc(size / 8, -size / 2.6, size / 12, size / 20, -20, 160);
+                            popMatrix();
+                            pushMatrix();
+                            break;
+                    };
+                } else {
+                    switch(level) {
+                        case 3:
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(270) * size / 2, -cos(270) * size / 1.6);
+                            rotate(-20);
+                            rect(-size / 6, -size / 6, size / 3, size / 3);
+                            popMatrix();
+                            pushMatrix();
+                            translate(sin(90) * size / 2, -cos(90) * size / 1.6);
+                            rotate(20);
+                            rect(-size / 6, -size / 6, size / 3, size / 3);
+                            popMatrix();
+                        case 0:
+                        case 1:
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(40) * size / 1.4, -cos(40) * size / 1.4);
+                            rotate(-angle);
+                            ball(0, 0, size / 3);
+                            popMatrix();
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(-40) * size / 1.4, -cos(-40) * size / 1.4);
+                            rotate(-angle);
+                            ball(0, 0, size / 3);
+                            popMatrix();
+                            break;
+                        case 2:
+                            fill(color);
+                            pushMatrix();
+                            translate(sin(-40) * size / 1.2, size / 2 - cos(-40) * size / 1.2);
+                            beginShape();
+                            vertex(0, 0);
+                            vertex(-size / 5, -size / 3);
+                            vertex(-size / 6, -size / 3 * 2);
+                            vertex(size / 7, -size / 4 * 3);
+                            vertex(-size / 25, -size / 5 * 2.8);
+                            vertex(size / 6, -size / 3 * 2);
+                            vertex(0, -size / 3);
+                            endShape();
+                            popMatrix();
+                            pushMatrix();
+                            translate(sin(40) * size / 1.2, size / 2 - cos(40) * size / 1.2);
+                            beginShape();
+                            vertex(0, 0);
+                            vertex(size / 5, -size / 3);
+                            vertex(size / 6, -size / 3 * 2);
+                            vertex(-size / 8, -size / 4 * 3);
+                            vertex(size / 25, -size / 5 * 2.8);
+                            vertex(-size / 6, -size / 3 * 2);
+                            vertex(0, -size / 3);
+                            endShape();
+                            popMatrix();
+                            break;
+                        case 4:
+                            noFill();
+                            strokeWeight(size / 10);
+                            stroke(color);
+                            bezier(-size / 3, -size / 3, -size / 2, -size / 2, -size / 2, -size / 1.5, -size / 2, -size / 1.5);
+                            bezier(size / 3, -size / 3, size / 2, -size / 2, size / 2, -size / 1.5, size / 2, -size / 1.5);
+                            noStroke();
+                            fill(color);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2.5, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 1.7, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2.5, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 1.7, -size / 0.9);
+                            break;
+                        default:
+                            noFill();
+                            strokeWeight(size / 10);
+                            stroke(color);
+                            bezier(-size / 3, -size / 2.6, -size / 5, -size / 2, -size / 1.8, -size / 1.5, -size / 2, -size / 1.4);
+                            bezier(size / 3, -size / 2.6, size / 5, -size / 2, size / 1.8, -size / 1.5, size / 2, -size / 1.4);
+                            noStroke();
+                            fill(color);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 2, -size / 0.9);
+                            triangle(-size / 2.2, -size / 1.5, -size / 1.85, -size / 1.5, -size / 1.7, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 2, -size / 0.9);
+                            triangle(size / 2.2, -size / 1.5, size / 1.85, -size / 1.5, size / 1.7, -size / 0.9);
+                            popMatrix();
+                            pushMatrix();
+                            translate(x, y);
+                            scale(1, 0.8);
+                            fill(color);
+                            triangle(-size / 2, -size / 1.5, -size / 3, -size / 5, -size / 4.5, -size / 5);
+                            triangle(-size / 6, -size / 2.5, -size / 3, -size / 2, -size / 3.5, -size / 3);
+                            triangle(size / 2, -size / 1.5, size / 3, -size / 5, size / 4.5, -size / 5);
+                            triangle(size / 6, -size / 2.5, size / 3, -size / 2, size / 3.5, -size / 3);
+                            ball(0, 0, size);
+                            fill(color);
+                            ball(0, size / 2, size / 2.5);
+                            popMatrix();
+                            pushMatrix();
+                            break;
+                    };
+                    if (level < 5) {
+                        popMatrix();
+                        fill(color);
+                        ball(x, y, size);
+                        pushMatrix();
+                    }
+                }
+                popMatrix();
+            };
+            
+            // Draws gems
+            function drawGem(x, y, size, r, fade) {
+                noStroke();
+                pushMatrix();
+                translate(x, y);
+                rotate(r);
+                fill(255, 255, 255, fade * 120);
+                ellipse(0, 0, size / 1.2, size);
+                fill(255, 120, 20, fade * 50);
+                arc(0, 0, size / 1.2, size, 120, 360);
+                arc(0, 0, size / 1.2, size, 180, 420);
+                arc(0, 0, size / 1.2, size, 180, 310);
+                arc(0, 0, size / 1.2, size, 230, 360);
+                fill(255, 255, 250, fade * 50);
+                triangle(-size / 15, -size / 5, size / 8, size / 3, -size / 5, size / 6);
+                popMatrix();
+            };
+            
+            // Draws towers
+            function drawTower(x, y, size, angle, type, level) {
+                pushMatrix();
+                translate(x, y);
+                scale(size / 100, size / 100);
+                rotate(angle);
+                translate(0, -25);
+                noStroke();
+                if (type === "archer") {
+                    switch (level) {
+                        case 0:
+                            fill(180, 120, 70);
+                            rect(-5, 0, 10, 50);
+                            fill(0, 0, 0, 50);
+                            ellipse(0, 10, 3, 10);
+                            ellipse(0, 25, 3, 10);
+                            ellipse(0, 40, 3, 10);
+                            noFill();
+                            stroke(190, 180, 150);
+                            strokeWeight(2);
+                            line(-45, 30, 45, 30);
+                            stroke(190, 140, 75);
+                            strokeWeight(3);
+                            arc(0, 20, 100, 60, 20, 160);
+                            noStroke();
+                            fill(0, 0, 0, 50);
+                            rect(-5, 48, 10, 3);
+                            break;
+                        case 1:
+                            fill(180, 120, 70);
+                            rect(-5, 0, 10, 50);
+                            fill(0, 0, 0, 50);
+                            ellipse(0, 10, 3, 10);
+                            ellipse(0, 25, 3, 10);
+                            ellipse(0, 40, 3, 10);
+                            noFill();
+                            stroke(190, 180, 150);
+                            strokeWeight(2);
+                            line(-45, 30, 45, 30);
+                            stroke(190, 140, 75);
+                            strokeWeight(3);
+                            beginShape();
+                            vertex(-47, 28);
+                            vertex(-35, 40);
+                            vertex(-40, 42);
+                            vertex(-30, 38);
+                            vertex(-5, 50);
+                            vertex(5, 50);
+                            vertex(30, 38);
+                            vertex(40, 42);
+                            vertex(35, 40);
+                            vertex(47, 28);
+                            endShape();
+                            noStroke();
+                            fill(0, 0, 0, 50);
+                            rect(-5, 48, 10, 3);
+                            break;
+                        case 2:
+                            fill(180, 130, 90);
+                            rect(-5, 0, 10, 50, 2, 2, 0, 0);
+                            fill(0, 0, 0, 50);
+                            ellipse(0, 10, 3, 10);
+                            ellipse(0, 25, 3, 10);
+                            ellipse(0, 40, 3, 10);
+                            noFill();
+                            stroke(190, 180, 150);
+                            strokeWeight(2);
+                            line(-45, 30, 45, 30);
+                            line(-44, 34, 44, 34);
+                            stroke(190, 150, 95);
+                            strokeWeight(3);
+                            triangle(-47, 28, -40, 55, -7, 50);
+                            triangle(47, 28, 40, 55, 7, 50);
+                            noStroke();
+                            fill(0, 0, 0, 50);
+                            rect(-5, 48, 10, 3);
+                            fill(70, 70, 75);
+                            ellipse(-7, 50, 7, 7);
+                            ellipse(7, 50, 7, 7);
+                            fill(100, 100, 105);
+                            triangle(-5, 50, 5, 50, 0, 60);
+                            fill(255, 255, 245, 50);
+                            triangle(0, 50, 5, 50, 0, 60);
+                            break;
+                        case 3:
+                            fill(150, 150, 130);
+                            rect(-5, 0, 10, 50, 2, 2, 0, 0);
+                            fill(0, 0, 0, 50);
+                            ellipse(0, 10, 3, 10);
+                            ellipse(0, 25, 3, 10);
+                            ellipse(0, 40, 3, 10);
+                            noFill();
+                            stroke(190, 180, 150);
+                            strokeWeight(2);
+                            line(-45, 30, 45, 30);
+                            line(-44, 34, 44, 34);
+                            stroke(190, 180, 160);
+                            strokeWeight(3);
+                            beginShape();
+                            vertex(-45, 30);
+                            bezierVertex(-45, 40, -40, 50, -35, 55);
+                            vertex(-5, 50);
+                            vertex(5, 50);
+                            vertex(35, 55);
+                            bezierVertex(40, 50, 45, 40, 45, 30);
+                            endShape();
+                            noStroke();
+                            fill(0, 0, 0, 50);
+                            rect(-5, 48, 10, 3);
+                            fill(70, 70, 75);
+                            ellipse(-7, 50, 7, 7);
+                            ellipse(7, 50, 7, 7);
+                            ellipse(-35, 55, 5, 5);
+                            ellipse(35, 55, 5, 5);
+                            ellipse(-45, 30, 5, 5);
+                            ellipse(45, 30, 5, 5);
+                            fill(255, 120, 20);
+                            triangle(-3, 50, 3, 50, 0, 60);
+                            triangle(-3, 50, -5, 50, -4, 57);
+                            triangle(5, 50, 3, 50, 4, 57);
+                            break;
+                        case 4:
+                            noStroke();
+                            fill(160, 160, 160);
+                            rect(-4, 40, 8, 5);
+                            fill(130, 130, 145);
+                            rect(-5, 45, 10, 5);
+                            beginShape();
+                            vertex(-5, 40);
+                            vertex(5, 40);
+                            vertex(5, 5);
+                            vertex(0, 0);
+                            vertex(-5, 5);
+                            endShape();
+                            fill(100, 190, 255);
+                            ellipse(0, 10, 5, 5);
+                            strokeWeight(3);
+                            stroke(100, 190, 255);
+                            line(-5, 30, 5, 30);
+                            line(0, 30, 0, 40);
+                            break;
+                    }
+                } else {
+                    fill(60, 60, 80);
+                    rect(-10, 0, 20, 50, 20, 20, 0, 0);
+                    fill(255, 255, 245, 50);
+                    rect(-7, 10, 4, 35);
+                    if (level === 1 || level === 2) {
+                        fill(255, (level - 1) * 130, 50 - (level - 1) * 50);
+                        rect(-8, 50, 16, 2);
+                        ellipse(0, 20, 10, 10);
+                    }
+                    if (level === 3 || level === 4) {
+                        fill(255, 130, 20);
+                        if (level === 4) {
+                            fill(100, 190, 255);
+                        }
+                        rect(-2, 45, 4, 5);
+                        ellipse(0, 20, 10, 10);
+                        triangle(-8, 50, -4, 50, -6, 60);
+                        triangle(4, 50, -4, 50, 0, 65);
+                        triangle(8, 50, 4, 50, 6, 60);
+                        fill(255, 255, 245, 100);
+                        ellipse(0, 20, 7, 7);
+                    }
+                }
+                
+                popMatrix();
+            };
+            
+            var bladeLength = 80;
+            
+            var swordDesigns = {
+                names : [
+                    "Copper",
+                    "Bronze",
+                    "Iron",
+                    "Steel",
+                    "Gold",
+                    "Titanium",
+                    "Diamond",
+                    "Graveore"
+                ], colors : [
+                    color(150, 110, 90),
+                    color(150, 130, 100),
+                    color(100, 100, 100),
+                    color(150, 150, 150),
+                    color(220, 190, 130),
+                    color(180, 180, 180),
+                    color(170, 230, 255),
+                    color(90, 70, 90)
+                ], blades : [
+                    function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 20);
+                        vertex(0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 20);
+                        bezierVertex(20, 20, 20, 10, 10, 0);
+                        bezierVertex(0, 10, 0, 20, 0, 20);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 20);
+                        bezierVertex(20, 20, 20, 10, 10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 20, 70, 20, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, bladeLength);
+                        vertex(0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, bladeLength);
+                        vertex(10, 0);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, bladeLength);
+                        vertex(10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 14, 40, 13, 30);
+                        quad(10, 60, 10, 80, 17, 70, 15, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 20);
+                        vertex(0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 20);
+                        vertex(10, 0);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 20);
+                        vertex(10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 20, 70, 20, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 25);
+                        vertex(0, bladeLength);
+                        vertex(-10, bladeLength + 10);
+                        vertex(5, bladeLength + 20);
+                        vertex(15, bladeLength + 20);
+                        vertex(30, bladeLength + 10);
+                        vertex(20, bladeLength);
+                        vertex(20, 25);
+                        vertex(10, 0);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, bladeLength + 20);
+                        vertex(15, bladeLength + 20);
+                        vertex(30, bladeLength + 10);
+                        vertex(20, bladeLength);
+                        vertex(20, 25);
+                        vertex(10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 20, 70, 20, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 30);
+                        vertex(0, bladeLength + 5);
+                        vertex(5, bladeLength + 10);
+                        vertex(5, bladeLength + 20);
+                        vertex(15, bladeLength + 20);
+                        vertex(15, bladeLength + 10);
+                        vertex(20, bladeLength + 5);
+                        vertex(20, 30);
+                        vertex(10, 0);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, bladeLength + 20);
+                        vertex(15, bladeLength + 20);
+                        vertex(15, bladeLength + 10);
+                        vertex(20, bladeLength + 5);
+                        vertex(20, 30);
+                        vertex(10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 20, 70, 20, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 30);
+                        vertex(5, bladeLength);
+                        vertex(0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        bezierVertex(15, bladeLength / 3 * 2 + 30, 20, bladeLength / 3 + 30, 20, 30);
+                        bezierVertex(20, 30, 20, 15, 10, 0);
+                        vertex(10, 15);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, 30);
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        bezierVertex(15, bladeLength / 3 * 2 + 30, 20, bladeLength / 3 + 30, 20, 30);
+                        bezierVertex(20, 30, 20, 15, 10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 18, 70, 19, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(0, 30);
+                        bezierVertex(0, bladeLength / 3 + 30, 5, bladeLength / 3 * 2 + 30, 0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        bezierVertex(15, bladeLength / 3 * 2 + 30, 20, bladeLength / 3 + 30, 20, 30);
+                        bezierVertex(20, 30, 20, 15, 10, 0);
+                        bezierVertex(0, 15, 0, 30, 0, 30);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, 30);
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        bezierVertex(15, bladeLength / 3 * 2 + 30, 20, bladeLength / 3 + 30, 20, 30);
+                        bezierVertex(20, 30, 20, 15, 10, 0);
+                        endShape();
+                        quad(10, 40, 10, 50, 20, 40, 20, 30);
+                        quad(10, 60, 10, 80, 18, 70, 19, 50);
+                    }, function(color) {
+                        fill(color);
+                        noStroke();
+                        beginShape();
+                        vertex(-5, 0);
+                        vertex(0, 50);
+                        vertex(0, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 50);
+                        vertex(25, 0);
+                        vertex(10, 20);
+                        endShape();
+                        fill(255, 255, 255, 50);
+                        beginShape();
+                        vertex(10, 50);
+                        vertex(10, bladeLength + 20);
+                        vertex(20, bladeLength + 20);
+                        vertex(20, 50);
+                        vertex(25, 0);
+                        vertex(10, 20);
+                        endShape();
+                        quad(10, 40, 10, 50, 21, 40, 22, 29);
+                        quad(10, 60, 10, 80, 20, 70, 20, 50);
+                    }
+                ], handles : [
+                    function() {
+                        fill(160, 130, 100);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(100, 100, 110);
+                        rect(-10, -5, 40, 10, 10);
+                        rect(5, 25, 10, 5, 5);
+                    }, function() {
+                        fill(160, 150, 130);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(120, 120, 115);
+                        quad(10, -5, 40, 0, 10, 5, -20, 0);
+                        rect(5, 25, 10, 5, 5);
+                    }, function() {
+                        fill(160, 130, 120);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(130, 130, 125);
+                        beginShape();
+                        vertex(-10, 0);
+                        vertex(5, -5);
+                        vertex(15, -5);
+                        vertex(30, 0);
+                        vertex(30, 5);
+                        vertex(-10, 5);
+                        endShape();
+                        rect(5, 25, 10, 5, 5);
+                        fill(255, 255, 255, 40);
+                        rect(5, -5, 10, 10);
+                    }, function() {
+                        fill(160, 150, 130);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(100, 100, 110);
+                        beginShape();
+                        vertex(-10, 5);
+                        vertex(0, 0);
+                        vertex(0, -5);
+                        vertex(5, 0);
+                        vertex(10, -10);
+                        vertex(15, 0);
+                        vertex(20, -5);
+                        vertex(20, 0);
+                        vertex(30, 5);
+                        endShape();
+                        rect(5, 25, 10, 5);
+                        triangle(5, 30, 15, 30, 10, 35);
+                    }, function() {
+                        fill(110, 140, 200);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(200, 170, 120);
+                        (rect)(-10, -5, 40, 8, 2, 2, 10, 10);
+                        quad(0, -5, 20, -5, 12, -10, 8, -10);
+                        rect(5, 25, 10, 5);
+                    }, function() {
+                        fill(100, 100, 110);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(140, 140, 140);
+                        beginShape();
+                        vertex(-10, 0);
+                        bezierVertex(-5, -5, 0, -5, 5, -5);
+                        bezierVertex(5, 0, 15, 0, 15, -5);
+                        bezierVertex(20, -5, 25, -5, 30, 0);
+                        bezierVertex(20, 5, 0, 5, -10, 0);
+                        endShape();
+                        rect(5, 25, 10, 5, 5);
+                    }, function() {
+                        fill(110, 140, 200);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        (rect)(5, 0, 5, 30, 5, 0, 0, 5);
+                        (rect)(10, 5, 5, 5);
+                        (rect)(10, 15, 5, 5);
+                        fill(210, 180, 120);
+                        (rect)(-10, -5, 40, 8, 2, 2, 10, 10);
+                        ellipse(10, -5, 10, 10);
+                        (rect)(-10, -10, 5, 15, 0, 0, 0, 5);
+                        (rect)(25, -10, 5, 15, 0, 0, 5, 0);
+                        rect(5, 25, 10, 5, 10);
+                        fill(70, 80, 200);
+                        quad(10, -8, 15, -3, 10, 2, 5, -3);
+                    }, function() {
+                        fill(160, 130, 140);
+                        rect(5, 0, 10, 30, 5);
+                        fill(0, 0, 0, 50);
+                        rect(5, 0, 5, 30, 5, 0, 0, 5);
+                        fill(100, 100, 110);
+                        rect(-10, -5, 40, 10, 0, 0, 10, 10);
+                        arc(-5, -5, 10, 15, 90, 270);
+                        arc(25, -5, 10, 15, 270, 450);
+                        rect(5, 25, 10, 5);
+                        triangle(5, 25, 15, 25, 10, 35);
+                        fill(230, 225, 210);
+                        ellipse(10, 0, 20, 18);
+                        rect(5, 0, 10, 15, 5);
+                        fill(0, 0, 0, 80);
+                        ellipse(5, 1, 6, 5);
+                        ellipse(15, 1, 6, 5);
+                    }
+                ]
+            };
+            
+            function drawSword(x, y, r, size, metalNum, bladeNum, handleNum) {
+                pushMatrix();
+                translate(x, y);
+                rotate(r);
+                scale(size / 100);
+                swordDesigns.blades[bladeNum](swordDesigns.colors[metalNum]);
+                translate(0, bladeLength + 20);
+                swordDesigns.handles[handleNum]();
+                popMatrix();
+            };
+            
+            var player, mobs = [], gems = [], walls = [], towers = [], size = 50, level = 0;
+            var gameMode = "before";
+            
+            function testCost(cost) {
+                if (player.coins >= cost) {
+                    player.coins -= cost;
+                    return true;
+                }
+                return false;
+            };
+            
+            var camera = (function() {
+                camera = {x : 0, y : 0};
+                
+                camera.pack = function() {
+                    this.x = 0;
+                    this.y += smooth(this.y, constrain(300 - player.y, 0, height), 20);
+                    translate(this.x, this.y);
+                };
+                
+                return camera;
+            })();
+            
+            var base = {
+                health : 100,
+                reset : function() {
+                    this.health = 100;
+                }
+            };
+            
+            /** Wall varructor **/
+            var Wall = (function() {
+                Wall = function(x, y, w, h) {
+                    this.x = x;
+                    this.y = y;
+                    this.w = w;
+                    this.h = h;
+                    this.bricks = [];
+                    for (var i = 0; i < this.h / 4; i += 10) {
+                        for (var j = 0; j < this.w - 50; j += 2) {
+                            let lastWidth = random(10, 50);
+                            this.bricks.push({x : this.x + j, y : this.y + i, w : lastWidth, h : 8});
+                            j += lastWidth;
+                        }
+                        
+                        this.bricks.push({x : this.x + j, y : this.y + i, w : this.w - j, h : 8});
+                    }
+                };
+                
+                Wall.prototype.display = function() {
+                    if (this.y + camera.y > height) {
+                        return;
+                    }
+                    noStroke();
+                    fill(50, 50, 55);
+                    rect(this.x, this.y, this.w, this.h);
+                    for (var i = 0; i < this.bricks.length; i++) {
+                        pushMatrix();
+                        translate(this.bricks[i].x, this.bricks[i].y + this.bricks[i].h);
+                        scale(1, -1);
+                        image(brick, 0, 0, this.bricks[i].w, this.bricks[i].h);
+                        popMatrix();
+                    }
+                };
+                
+                Wall.prototype.collide = function(x, y, size) {
+                    return x + size / 2 > this.x && x - size / 2 < this.x + this.w && y + size / 2 > this.y && y - size / 2 < this.y + this.h;
+                };
+                
+                return Wall;
+            })();
+            
+            walls.push(new Wall(80, 400, 140, 200));
+            walls.push(new Wall(380, 400, 140, 200));
+            
+            /** Tower varructor **/
+            var Tower = (function() {
+                Tower = function(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.type = undefined;
+                    this.ready = false;
+                    this.level = 0;
+                    this.ang = 0;
+                    this.projectiles = [];
+                    this.size = 60;
+                    this.target = undefined;
+                    let parent = this;
+                    this.cost = 0;
+                    this.archerB = this.getButton(this.x - 45, this.y - 40, 50, function() {
+                        noFill();
+                        stroke(255, 255, 255);
+                        strokeWeight(2);
+                        line(15, 15, 25, 25);
+                        noStroke();
+                        fill(255, 255, 255);
+                        textSize(13);
+                        text("$40", 8, -8);
+                        noFill();
+                        stroke(255, 255, 255);
+                        strokeWeight(3);
+                        rotate(-15);
+                        translate(-15, 0);
+                        arc(0, 0, 15, 20, 270, 450);
+                        strokeWeight(2);
+                        line(0, -10, 0, 10);
+                        line(-5, 0, 15, 0);
+                        noStroke();
+                        fill(255, 255, 255);
+                        triangle(15, -3, 15, 3, 20, 0);
+                    }, function() {
+                        if (player.coins >= 40) {
+                            parent.type = "archer";
+                            parent.cost = 60;
+                            parent.ready = true;
+                            player.coins -= 40;
+                        }
+                    });
+                    this.cannonB = this.getButton(this.x + 45, this.y - 40, 50, function() {
+                        noFill();
+                        stroke(255, 255, 255);
+                        strokeWeight(2);
+                        line(-15, 15, -25, 25);
+                        noStroke();
+                        fill(255, 255, 255);
+                        textSize(13);
+                        text("$60", 8, -8);
+                        noStroke();
+                        fill(255, 255, 255);
+                        rotate(-15);
+                        translate(-15, 0);
+                        rect(0, -5, 10, 25, 0, 0, 10, 10);
+                        rect(-3, 5, 16, 10);
+                    }, function() {
+                        if (player.coins >= 60) {
+                            player.coins -= 60;
+                            parent.type = "cannon";
+                            parent.cost = 80;
+                            parent.ready = true;
+                        }
+                    });
+                    this.upgradeB = this.getButton(this.x - 45, this.y - 40, 50, function() {
+                        noFill();
+                        stroke(255, 255, 255);
+                        strokeWeight(2);
+                        line(15, 15, 25, 25);
+                        noStroke();
+                        fill(255, 255, 255);
+                        beginShape();
+                        vertex(-10, -10);
+                        vertex(0, -20);
+                        vertex(10, -10);
+                        vertex(5, -10);
+                        vertex(5, 0);
+                        vertex(-5, 0);
+                        vertex(-5, -10);
+                        endShape();
+                        rect(-5, 2, 10, 3);
+                        textSize(13);
+                        textAlign(CENTER, CENTER);
+                        text(parent.cost, 0, 15);
+                    }, function() {
+                        if (player.coins >= parent.cost && parent.level < 4) {
+                            player.coins -= parent.cost;
+                            parent.level ++;
+                            parent.cost += 20;
+                        }
+                    });
+                    this.selected = false;
+                };
+                
+                Tower.prototype.getButton = function(x, y, size, icon, func) {
+                    return {
+                        x : x,
+                        y : y,
+                        size : size,
+                        icon : icon,
+                        func : func,
+                        pack : function() {
+                            noStroke();
+                            if (dist(this.x, this.y, mouseX - camera.x, mouseY - camera.y) < this.size / 2) {
+                                fill(255, 255, 255, 80);
+                                overButton = true;
+                                if (click) {
+                                    this.func();
+                                }
+                            } else {
+                                fill(255, 255, 255, 50);
+                            }
+                            ellipse(this.x, this.y, this.size, this.size);
+                            pushMatrix();
+                            translate(this.x, this.y);
+                            this.icon();
+                            popMatrix();
+                        }
+                    };
+                };
+                
+                Tower.prototype.display = function() {
+                    if (this.ready) {
+                        if (this.type === "archer" && this.level === 4 && this.target !== undefined) {
+                            strokeWeight(3);
+                            stroke(100, 190, 255, 200);
+                            noFill();
+                            bezier(this.x, this.y, lerp(this.x, this.target.x, 0.3) + random(-10, 10), lerp(this.y, this.target.y, 0.3) + random(-10, 10), lerp(this.x, this.target.x, 0.7) + random(-10, 10), lerp(this.y, this.target.y, 0.7) + random(-10, 10), this.target.x, this.target.y);
+                        }
+                        for (var i = this.projectiles.length - 1; i >= 0; i--) {
+                            if (this.type === "archer") {
+                                if (this.level !== 4) {
+                                    drawArrow(this.projectiles[i].x, this.projectiles[i].y, this.size / 1.5, this.projectiles[i].ang, this.projectiles[i].level);
+                                }
+                                this.projectiles[i].x += sin(this.projectiles[i].ang) * 15;
+                                this.projectiles[i].y -= cos(this.projectiles[i].ang) * 15;
+                            } else {
+                                drawCannonball(this.projectiles[i].x, this.projectiles[i].y, this.size / 1.5, this.projectiles[i].ang, this.projectiles[i].level);
+                                this.projectiles[i].x += sin(this.projectiles[i].ang) * 9;
+                                this.projectiles[i].y -= cos(this.projectiles[i].ang) * 9;
+                            }
+                            if (this.projectiles[i].x > width + this.size || this.projectiles[i].x < -this.size || this.projectiles[i].y > height + this.size || this.projectiles[i].y < -this.size) {
+                                this.projectiles.splice(i, 1);
+                            } else {
+                                for (var j = mobs.length - 1; j >= 0; j--) {
+                                    if (dist(this.projectiles[i].x, this.projectiles[i].y, mobs[j].x, mobs[j].y) < mobs[j].size / 2) {
+                                        mobs[j].health -= this.projectiles[i].damage / 6;
+                                        this.projectiles.splice(i, 1);
+                                        j = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (this.selected) {
+                        if (this.ready) {
+                            this.upgradeB.pack();
+                        } else {
+                            this.archerB.pack();
+                            this.cannonB.pack();
+                        }
+                    }
+                    noStroke();
+                    if (dist(this.x, this.y, mouseX - camera.x, mouseY - camera.y) < this.size / 2) {
+                        fill(255, 255, 255, 80);
+                        overButton = true;
+                        if (click) {
+                            this.selected = true;
+                        }
+                    } else {
+                        fill(255, 255, 255, 50);
+                        if (click) {
+                            this.selected = false;
+                        }
+                    }
+                    pushMatrix();
+                    translate(this.x, this.y);
+                    ellipse(0, 0, this.size, this.size);
+                    if (this.ready) {
+                        drawTower(0, 0, 100, this.ang, this.type, this.level);
+                    }
+                    popMatrix();
+                    if (this.selected) {
+                        if (this.ready) {
+                            noStroke();
+                            textSize(20);
+                            fill(255, 255, 255);
+                            text(this.type.toUpperCase() + " LEVEL " + (this.level + 1), this.x, this.y + this.size / 2);
+                        } else {
+                            noStroke();
+                            textSize(20);
+                            fill(255, 255, 255);
+                            text("EMPTY TOWER", this.x, this.y);
+                        }
+                    }
+                };
+                
+                Tower.prototype.aim = function() {
+                    this.target = undefined;
+                    for (var i = 0; i < mobs.length; i++) {
+                        if (Math.pow(mobs[i].x - this.x, 2) + Math.pow(mobs[i].y - this.y, 2) < Math.pow((this.level / 2 + 2) * 100, 2)) {
+                            if (this.target === undefined) {
+                                this.target = mobs[i];
+                            } else {
+                                let diffX = [mobs[i].x - this.x, this.target.x - this.x];
+                                let diffY = [mobs[i].y - this.y, this.target.y - this.y];
+                                if (Math.pow(diffX[0], 2) + Math.pow(diffY[0], 2) < Math.pow(diffX[1], 2) + Math.pow(diffY[1], 2)) {
+                                    this.target = mobs[i];
+                                }
+                            }
+                        }
+                    }
+                };
+                
+                Tower.prototype.pack = function() {
+                    if (this.ready) {
+                        this.aim();
+                        if (this.target !== undefined) {
+                            this.ang = atan2(this.y - this.target.y, this.x - this.target.x) + 90;
+                            this.timer ++;
+                            if (this.timer > (this.type === "archer" ? 8 : 15)) {
+                                this.projectiles.push({
+                                    x : this.x + sin(this.ang + 180) * this.size / 2,
+                                    y : this.y - cos(this.ang + 180) * this.size / 2,
+                                    damage : (this.type === "archer" ? 3 : 10) + this.level,
+                                    ang : this.ang + 180,
+                                    level : this.level
+                                });
+                                this.timer = 0;
+                            }
+                        } else {
+                            this.timer = 0;
+                        }
+                    }
+                    this.display();
+                };
+                
+                Tower.prototype.reset = function() {
+                    this.type = undefined;
+                    this.ready = false;
+                    this.level = 0;
+                    this.ang = 0;
+                    this.projectiles = [];
+                    this.target = undefined;
+                    let parent = this;
+                    this.cost = 0;
+                    this.selected = false;
+                };
+                
+                return Tower;
+            })();
+            
+            towers.push(new Tower(150, 490));
+            towers.push(new Tower(150, 560));
+            towers.push(new Tower(450, 490));
+            towers.push(new Tower(450, 560));
+            
+            /** Gem varructor **/
+            var Gem = (function() {
+                Gem = function(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.xTo = x + random(-size, size);
+                    this.yTo = y + random(-size, size);
+                    this.r = random(360);
+                    this.fadeOut = false;
+                    this.fade = 1;
+                    this.dead = false;
+                    this.timer = 600;
+                };
+                
+                Gem.prototype.display = function() {
+                    drawGem(this.x, this.y, 15, this.r, this.fade);
+                };
+                
+                Gem.prototype.pack = function() {
+                    this.timer --;
+                    if (this.timer <= 0) {
+                        this.fadeOut = true;
+                    }
+                    
+                    if (this.fadeOut) {
+                        this.fade -= 0.1;
+                    }
+                    
+                    if (dist(this.x, this.y, player.x, player.y) < size + 5) {
+                        this.x += smooth(this.x, player.x, 30);
+                        this.y += smooth(this.y, player.y, 30);
+                        this.xTo = this.x;
+                        this.yTo = this.y;
+                        if (dist(this.x, this.y, player.x, player.y) < size / 2 + 5) {
+                            this.dead = true;
+                            player.coins += 10;
+                        }
+                    } else {
+                        this.x += smooth(this.x, this.xTo, 8);
+                        this.y += smooth(this.y, this.yTo, 8);
+                    }
+                    
+                    if (this.fade <= 0) {
+                        this.dead = true;
+                    }
+                    
+                    this.display();
+                };
+                
+                return Gem;
+            })();
+            
+            /** Player varructor **/
+            var Player = (function() {
+                Player = function(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.startX = x;
+                    this.startY = y;
+                    this.metalLevel = 0;
+                    this.bladeLevel = 0;
+                    this.handleLevel = 0;
+                    this.health = 100;
+                    this.startHealth = this.health;
+                    this.ang = 0;
+                    this.keys = [
+                        [UP, 87],
+                        [RIGHT, 68],
+                        [DOWN, 83],
+                        [LEFT, 65]
+                    ];
+                    this.attackAng = 0;
+                    this.attacking = false;
+                    this.coins = 0;
+                    this.powerUps = {
+                        speed : 0,
+                        looter : 0,
+                        blacksmith : 0,
+                        cleanHit : 0
+                    };
+                    this.healTime = 0;
+                    this.startedHeal = false;
+                };
+                
+                Player.prototype.display = function() {
+                    pushMatrix();
+                    translate(this.x, this.y);
+                    rotate(this.ang + 180 - this.attackAng * 1.5);
+                    if (this.health > 0) {
+                        drawSword(0, -size * 1.6, -20, size, this.metalLevel, this.bladeLevel, this.handleLevel);
+                    }
+                    popMatrix();
+                    drawPlayer(this.x, this.y, size, "top", this.ang, -this.attackAng * 1.5, -this.attackAng * 3);
+                    
+                    if (this.health > 0) {
+                        fill(100, 100, 105);
+                        rect(this.x - 20, this.y - size / 1.5, 40, 5);
+                        fill(lerpColor(color(255, 0, 0), color(0, 255, 0), this.health / this.startHealth));
+                        rect(this.x - 20, this.y - size / 1.5, map(this.health, 0, this.startHealth, 0, 40), 5);
+                    }
+                };
+                
+                Player.prototype.drawStats = function() {
+                    textFont(fonts[0], 30);
+                    textAlign(LEFT, TOP);
+                    fill(255, 255, 255);
+                    text("Gems: " + this.coins + "\nMobs left: " + mobs.length, 5, 5);
+                    textAlign(CENTER, CENTER);
+                    textSize(50);
+                    fill(0, 0, 50, 70);
+                    text("Wave " + (level + 1), 300, 45);
+                    fill(255, 255, 255);
+                    text("Wave " + (level + 1), 300, 40);
+                };
+                
+                Player.prototype.pack = function() {
+                    this.ang = atan2(this.y + camera.y - mouseY, this.x + camera.x - mouseX) + 90;
+                    
+                    if (!this.startHeal) {
+                        for (var i = 0; i < this.keys.length; i++) {
+                            if (keys[this.keys[i][0]] || keys[this.keys[i][1]]) {
+                                this.x += sin(i * 90) * (2.5 + this.powerUps.speed);
+                                this.y -= cos(i * 90) * (2.5 + this.powerUps.speed);
+                                for (var j = 0; j < walls.length; j++) {
+                                    if (walls[j].collide(this.x, this.y, size * 0.8)) {
+                                        this.x -= sin(i * 90) * (2.5 + this.powerUps.speed);
+                                        this.y += cos(i * 90) * (2.5 + this.powerUps.speed);
+                                    }
+                                }
+                            }
+                        }
+                        if ((this.x < 80 || this.x > 520) && this.y > 390) {
+                            this.y = 390;
+                        }
+                    }
+                    
+                    if (this.y > 500 && this.x > 200 && this.x < 400) {
+                        if (this.health > 0) {
+                            this.y = 450;
+                            this.health = 100;
+                        } else {
+                            if (!this.startedHeal) {
+                                this.healTime = 0;
+                            }
+                            this.y = 600;
+                            this.startedHeal = true;
+                            this.healTime += (1 + this.powerUps.blacksmith / 3);
+                            fill(255, 255, 255);
+                            textAlign(CENTER, CENTER);
+                            textSize(20);
+                            text("HEALING: " + Math.round(map((360 - this.healTime), 0, 360, 0, 100)) + "%", 300, 300);
+                            strokeWeight(5);
+                            noFill();
+                            stroke(255, 255, 255);
+                            arc(300, 300, 200, 200, -90, this.healTime - 90);
+                            if (this.healTime > 360) {
+                                this.y = 450;
+                                this.health = 100;
+                                this.startedHeal = false;
+                            }
+                        }
+                    }
+                    
+                    this.x = constrain(this.x, 0, 600);
+                    this.y = constrain(this.y, -600, 600);
+                    
+                    if (click && !this.attacking && this.health > 0) {
+                        this.attacking = true;
+                    }
+                    
+                    if (this.attacking) {
+                        this.attackAng += smooth(this.attackAng, 30, 10 - this.handleLevel /1.5);
+                        if (this.attackAng > 28) {
+                            this.attacking = false;
+                            for (var i = 0; i < mobs.length; i++) {
+                                if (dist(this.x + sin(this.ang + 180) * size / 2, this.y - cos(this.ang + 180) * size / 2, mobs[i].x, mobs[i].y) < size / 2 + mobs[i].size / 2) {
+                                    mobs[i].health -= 4 + this.bladeLevel * 4;
+                                    if (random(4) > this.powerUps.cleanHit) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        this.attackAng += smooth(this.attackAng, 0, 10 - this.handleLevel / 2);
+                    }
+                    
+                    this.display();
+                };
+                
+                Player.prototype.reset = function() {
+                    this.x = this.startX;
+                    this.y = this.startY;
+                    this.health = 100;
+                    this.attackAng = 0;
+                    this.attacking = false;
+                    this.healTime = 0;
+                    this.startedHeal = false;
+                };
+                
+                Player.prototype.newGame = function() {
+                    this.x = this.startX;
+                    this.y = this.startY;
+                    this.metalLevel = 0;
+                    this.bladeLevel = 0;
+                    this.handleLevel = 0;
+                    this.health = 100;
+                    this.attackAng = 0;
+                    this.attacking = false;
+                    this.coins = 0;
+                    this.healTime = 0;
+                    this.startedHeal = false;
+                    this.powerUps = {
+                        speed : 0,
+                        looter : 0,
+                        blacksmith : 0,
+                        cleanHit : 0
+                    };
+                };
+                
+                return Player;
+            })();
+            
+            player = new Player(300, 300);
+            
+            /** Mob varructor **/
+            var Mob = (function() {
+                Mob = function(x, y, level) {
+                    this.x = x;
+                    this.y = y;
+                    
+                    this.ang = 180;
+                    
+                    level = constrain(level, 0, 59);
+                    
+                    this.level = level % 10 + 1;
+                    
+                    this.select = Math.floor(level / 10);
+                    
+                    this.name = [
+                        "Orc",
+                        "Goblin",
+                        "Hunter Killer",
+                        "Troll",
+                        "Nightmare",
+                        "Overlord"
+                    ][this.select];
+                    
+                    this.color = [
+                        [color(0, 220, 0), color(0, 130, 20)],
+                        [color(200, 180, 150), color(150, 130, 140)],
+                        [color(50, 0, 120), color(200, 10, 10)],
+                        [color(100, 100, 105), color(120, 150, 180)],
+                        [color(150, 120, 60), color(100, 70, 50)],
+                        [color(60, 20, 20), color(0, 0, 0)]
+                    ][this.select];
+                    
+                    this.color = lerpColor(this.color[0], this.color[1], this.level / 10);
+                    
+                    this.size = [
+                        [45, 55],
+                        [35, 45],
+                        [50, 60],
+                        [60, 70],
+                        [55, 65],
+                        [70, 90]
+                    ][this.select];
+                    
+                    this.size = lerp(this.size[0], this.size[1], this.level / 10);
+                    
+                    this.speed = [
+                        [1.5, 2],
+                        [3, 5],
+                        [1.5, 2],
+                        [0.5, 1],
+                        [1.5, 2],
+                        [2, 2.5]
+                    ][this.select];
+                    
+                    this.speed = lerp(this.speed[0], this.speed[1], this.level / 10) + random(0.2);
+                    
+                    this.damage = [
+                        [2, 5],
+                        [1, 3],
+                        [3, 6],
+                        [5, 10],
+                        [6, 9],
+                        [8, 12]
+                    ][this.select];
+                    
+                    this.damage = lerp(this.damage[0], this.damage[1], this.level / 10);
+                    
+                    this.health = [
+                        [20, 60],
+                        [10, 40],
+                        [70, 100],
+                        [130, 200],
+                        [80, 150],
+                        [120, 170]
+                    ][this.select];
+                    
+                    this.health = lerp(this.health[0], this.health[1], this.level / 10);
+                    this.startHealth = this.health;
+                    
+                    this.attackTimer = 0;
+                    this.attackTime = 5 / this.speed;
+                };
+                
+                Mob.prototype.display = function() {
+                    if (this.y + camera.y < -this.size * 1.5 || this.y + camera.y > height + this.size * 1.5) {
+                        return;
+                    }
+                    drawMob(this.x, this.y, this.size, "top", this.ang, this.color, this.select);
+                    
+                    fill(100, 100, 105);
+                    rect(this.x - 20, this.y - this.size / 1.5, 40, 5);
+                    fill(lerpColor(color(255, 0, 0), color(0, 255, 0), this.health / this.startHealth));
+                    rect(this.x - 20, this.y - this.size / 1.5, map(this.health, 0, this.startHealth, 0, 40), 5);
+                };
+                
+                Mob.prototype.move = function() {
+                    if (dist(this.x, this.y, player.x, player.y) < size * 1.5 && player.health > 0 && player.y + size / 2 > this.y) {
+                        this.ang = atan2(player.y - this.y, player.x - this.x) + 90;
+                        if (dist(this.x, this.y, player.x, player.y) < size * 0.5) {
+                            this.attackTimer ++;
+                            if (this.attackTimer >= this.attackTime) {
+                                this.attackTimer = 0;
+                                player.health -= this.damage / 30 / ((1 + player.metalLevel) / 3);
+                            }
+                        }
+                    } else {
+                        this.ang = atan2(600 - this.y, 300 - this.x) + 90;
+                    }
+                    
+                    if (this.x > 200 && this.x < 400 && this.y > 500 - this.size / 1.8) {
+                        this.attackTimer ++;
+                        if (this.attackTimer >= this.attackTime) {
+                            this.attackTimer = 0;
+                            base.health -= this.damage / 30;
+                        }
+                        return;
+                    }
+                    this.x += sin(this.ang) * this.speed;
+                    
+                    for (var i = 0; i < walls.length; i++) {
+                        if (walls[i].collide(this.x, this.y, this.size * 0.8)) {
+                            this.x -= sin(this.ang) * this.speed;
+                        }
+                    }
+                    this.y -= cos(this.ang) * this.speed;
+                    
+                    for (var i = 0; i < walls.length; i++) {
+                        if (walls[i].collide(this.x, this.y, this.size * 0.8)) {
+                            this.y += cos(this.ang) * this.speed;
+                        }
+                    }
+                };
+                
+                Mob.prototype.pack = function() {
+                    this.move();
+                    this.display();
+                };
+                
+                return Mob;
+            })();
+            
+            // Generates waves
+            var curInfo = 0;
+            var monsterFade = 0;
+            var mobInfo = [
+                {name : "Orc", speed : "Normal", health : "Low", damage : "Low", color : color(0, 220, 0), size : 45},
+                {name : "Goblin", speed : "Very High", health : "Very Low", damage : "Very Low", color : color(200, 180, 150), size : 35},
+                {name : "Hunter Killer", speed : "Normal", health : "Normal", damage : "Normal", color : color(50, 0, 120), size : 50},
+                {name : "Troll", speed : "Low", health : "Very High", damage : "High", color : color(100, 100, 105), size : 60},
+                {name : "Nightmare", speed : "Normal", health : "High", damage : "High", color : color(150, 120, 60), size : 55},
+                {name : "Overlord", speed : "High", health : "High", damage : "Very High", color : color(60, 20, 20), size : 70}
+            ];
+            
+            var mobTypes = [];
+            function generateMobs() {
+                mobTypes = [];
+                mobs = [];
+                groundColor = groundColors[(level / 10)  % groundColors.length];
+                for (var i = 0; i < constrain(1 + Math.floor(level / 3), 0, 6); i++) {
+                    let mobAmount = Math.floor(level / 2 - i * 5 + random(1, 4 + random(5)));
+                    let mobLevel = constrain(Math.floor(random(level * 0.8, level * 1.5)) + Math.floor(random(i * 5, i * 20)), 0, 59);
+                    for (var j = 0; j <  Math.ceil(mobAmount); j++) {
+                        mobs.push(new Mob(random(width), -1000 - i * 300, mobLevel));
+                    }
+                    if (mobAmount > 0) {
+                        mobTypes.push({
+                            name : mobInfo[Math.floor(mobLevel / 10)].name,
+                            amount : Math.ceil(mobAmount),
+                            level : mobLevel % 10
+                        });
+                    }
+                }
+            };
+            
+            var titlePos = {x : -500, h : 0.1};
+            
+            // Draws the title
+            function title(x, y) {
+                textFont(fonts[2], 110);
+                textAlign(CENTER, CENTER);
+                fill(255, 255, 255, 80);
+                text(programName, x - 5, y + 5);
+                fill(200, 180, 100);
+                text(programName, x, y);
+                textFont(fonts[0], 30);
+                textAlign(RIGHT, CENTER);
+                text("By AmsR Ghost", 520, 165);
+                noStroke();
+                fill(0, 0, 50, 50);
+                rect(x - 215, y, 440, 65);
+                pushMatrix();
+                translate(x + titlePos.x, y);
+                scale(1, titlePos.h);
+                fill(0, 10, 30);
+                beginShape();
+                vertex(-225, -3);
+                vertex(50, -3);
+                vertex(160, 0);
+                vertex(50, 3);
+                vertex(-225, 3);
+                endShape();
+                fill(200, 180, 100);
+                triangle(200, 0, 220, 5, 215, -5);
+                triangle(220, -20, 230, -15, 240, -25);
+                triangle(250, 5, 270, 0, 265, 5);
+                popMatrix();
+            };
+            
+            // Draws a tree
+            function tree(x, y, size) {
+                noStroke();
+                pushMatrix();
+                translate(x, y);
+                scale(size / 100, size / 100);
+                fill(30, 25, 30);
+                beginShape();
+                vertex(-15, 100);
+                vertex(15, 100);
+                vertex(18, 120);
+                vertex(20, 125);
+                vertex(10, 120);
+                vertex(12, 130);
+                vertex(-5, 125);
+                vertex(-20, 123);
+                vertex(-17, 120);
+                endShape();
+                fill(0, 45, 30);
+                triangle(0, 0, -30, 50 + sin(x + y + size) * 5, 30, 50 + sin(x + y + size + 180) * 5);
+                triangle(0, 30, -35, 80 + sin(x + y + size * 5 + 100) * 5, 35, 80 + sin(x + y + size * 5 + 280) * 5);
+                triangle(0, 60, -40, 110 + sin(x * 2 + y * 2 + size + 200) * 5, 40, 110 + sin(x * 2 + y * 2 + size + 20) * 5);
+                fill(0, 35, 30);
+                triangle(0, 0, -25, 48 + sin(x + y + size) * 5, 10, 48 + sin(x + y + size + 180) * 5);
+                triangle(0, 30, -30, 78 + sin(x + y + size * 5 + 100) * 5, 15, 78 + sin(x + y + size * 5 + 280) * 5);
+                triangle(0, 60, -35, 108 + sin(x * 2 + y * 2 + size + 200) * 5, 20, 108 + sin(x * 2 + y * 2 + size + 20) * 5);
+                popMatrix();
+            };
+            
+            // Returns the year started to the current year.
+            var date = new Date();
+            function getYearStr(startYear) {
+                return startYear + (startYear < date.getFullYear() ? "-" + date.getFullYear() : "");
+            };
+            
+            // Little squares for the menu.
+            var squares = (function() {
+                squares = [];
+                for (var i = 0; i < 20; i++) {
+                    squares.push({x : random(width), y : random(300, 600), yMove : random(1, 2), size : random(5, 15), opac : random(20, 40)});
+                }
+                return squares;
+            })();
+            
+            // Button varructor
+            var Button = (function() {
+                Button = function(x, y, w, h, txt, func) {
+                    this.x = x - w / 2;
+                    this.yTo = y - h / 2;
+                    this.y = 620;
+                    this.w = w;
+                    this.h = h;
+                    this.txt = txt;
+                    this.func = func;
+                    this.over = false;
+                    this.plus = 0;
+                };
+                
+                Button.prototype.display = function() {
+                    this.plus += smooth(this.plus, this.over ? 30 : 0, 8);
+                    noStroke();
+                    fill(140 + Math.floor(this.plus / 3), 140 + Math.floor(this.plus / 3), 140 + Math.floor(this.plus / 5));
+                    rect(this.x - this.plus / 2, this.y, this.w + this.plus, this.h);
+                    fill(0, 0, 20, 50);
+                    rect(this.x - this.plus / 2, this.y + this.h / 2, this.w + this.plus, this.h / 2);
+                    textAlign(CENTER, CENTER);
+                    textFont(fonts[0], this.h / 2);
+                    fill(255, 255, 255);
+                    text(this.txt, this.x + this.w / 2, this.y + this.h / 2);
+                    noStroke();
+                    fill(140 + Math.floor(this.plus / 3), 140 + Math.floor(this.plus / 3), 140 + Math.floor(this.plus / 5));
+                    rect(this.x - this.plus / 2, this.y, this.w + this.plus, this.h / 2);
+                    fill(90, 90, 90);
+                    pushMatrix();
+                    translate(this.x - this.plus / 2, this.y);
+                    triangle(0, 0, 15, 0, 0, 15);
+                    triangle(0, this.h, 15, this.h, 0, this.h - 15);
+                    arc(0, this.h / 2, 30, this.h / 2, -90, 90);
+                    translate(this.plus, 0);
+                    triangle(this.w, this.h, this.w - 15, this.h, this.w, this.h - 15);
+                    triangle(this.w, 0, this.w, 15, this.w - 15, 0);
+                    arc(this.w, this.h / 2, 30, this.h / 2, 90, 270);
+                    popMatrix();
+                    fill(255, 255, 255, 80);
+                    noStroke();
+                    text(this.txt, this.x + this.w / 2 - this.plus / 10, this.y + this.h / 2);
+                    text(this.txt, this.x + this.w / 2 + this.plus / 10, this.y + this.h / 2);
+                    noFill();
+                    strokeWeight(1.2);
+                    stroke(255, 255, 255);
+                    text(this.txt, this.x + this.w / 2, this.y + this.h / 2);
+                };
+                
+                Button.prototype.check = function() {
+                    var diffX = mouseX - this.x;
+                    var diffY = mouseY - this.y;
+                    return diffX > 0 && diffX < this.w && diffY > 0 && diffY < this.h;
+                };
+                
+                Button.prototype.pack = function() {
+                    this.over = false;
+                    if (this.check()) {
+                        overButton = true;
+                        this.over = true;
+                        if (click) {
+                            this.func();
+                        }
+                    }
+                    this.display();
+                    this.y += smooth(this.y, this.yTo, 8);
+                };
+                
+                return Button;
+            })();
+
+            // Object for buttons
+            var buttons = {
+                play : new Button(200, 420, 260, 50, "PLAY", function() {
+                    sceneChanger.reset(before);
+                    resetGame();
+                }), 
+                about : new Button(200, 480, 260, 50, "ABOUT", function() {
+                    sceneChanger.reset(about);
+                }), 
+                monsters : new Button(200, 540, 260, 50, "MONSTERS", function() {
+                    sceneChanger.reset(monsters);
+                }),
+                back : new Button(120, 560, 200, 50, "BACK", function() {
+                    sceneChanger.reset(menu);
+                }),
+                cont : new Button(480, 560, 200, 50, "CONTINUE", function() {
+                    sceneChanger.reset(before);
+                    isNewGame = true;
+                }),
+                upgradeMetal : new Button(300, 320, 300, 50, "METAL: COPPER", function() {
+                    if (player.metalLevel >= 7) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.metalLevel ++;
+                        this.txt = "METAL: " + swordDesigns.names[player.metalLevel].toUpperCase();
+                    }
+                }),
+                upgradeBlade : new Button(300, 380, 300, 50, "BLADE: Lv. 1", function() {
+                    if (player.bladeLevel >= 7) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.bladeLevel ++;
+                        this.txt = "BLADE: Lv. " + (player.bladeLevel + 1);
+                    }
+                }),
+                upgradeHandle : new Button(300, 440, 300, 50, "HANDLE: Lv. 1", function() {
+                    if (player.handleLevel >= 7) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.handleLevel ++;
+                        this.txt = "HANDLE: Lv. " + (player.handleLevel + 1);
+                    }
+                }),
+                upgradePower1 : new Button(105, 500, 120, 25, Object.keys(player.powerUps)[0].toUpperCase(), function() {
+                    if (player.powerUps.speed >= 3) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.powerUps.speed ++;
+                        this.txt = Object.keys(player.powerUps)[0].toUpperCase() + ": Lv. " + player.powerUps.speed;
+                    }
+                }),
+                upgradePower2 : new Button(235, 500, 120, 25, Object.keys(player.powerUps)[1].toUpperCase(), function() {
+                    if (player.powerUps.looter >= 3) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.powerUps.looter ++;
+                        this.txt = Object.keys(player.powerUps)[1].toUpperCase() + ": Lv. " + player.powerUps.looter;
+                    }
+                }),
+                upgradePower3 : new Button(365, 500, 120, 25, Object.keys(player.powerUps)[2].toUpperCase(), function() {
+                    if (player.powerUps.blacksmith >= 3) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.powerUps.blacksmith ++;
+                        this.txt = Object.keys(player.powerUps)[2].toUpperCase() + ": Lv. " + player.powerUps.blacksmith;
+                    }
+                }),
+                upgradePower4 : new Button(495, 500, 120, 25, Object.keys(player.powerUps)[3].toUpperCase(), function() {
+                    if (player.powerUps.cleanHit >= 3) {
+                        return;
+                    }
+                    if (testCost(50)) {
+                        player.powerUps.cleanHit ++;
+                        this.txt = Object.keys(player.powerUps)[3].toUpperCase() + ": Lv. " + player.powerUps.cleanHit;
+                    }
+                }),
+                left : new Button(40, 300, 40, 40, "<", function() {
+                    curInfo = (curInfo - 1) < 0 ? mobInfo.length - 1 : curInfo - 1;
+                    monsterFade = 0;
+                }),
+                right : new Button(560, 300, 40, 40, ">", function() {
+                    curInfo = (curInfo + 1) % mobInfo.length;
+                    monsterFade = 0;
+                })
+            };
+            
+            // Draws background waves
+            function drawWaves(waveY, waveH, waveA) {
+                waveD = width / waveA;
+                noStroke();
+                fill(255, 255, 255, 15);
+                beginShape();
+                vertex(0, waveY);
+                for (var i = 0; i < waveA; i++) {
+                    bezierVertex(i * waveD + waveD / 5 * 3, waveY + sin((i - 1) * 173) * waveH / 10, i * waveD, waveY + waveH, i * waveD + waveD / 2, waveY + waveH);
+                    bezierVertex(i * waveD + waveD, waveY + waveH, i * waveD + waveD / 5 * 2, waveY + sin(i * 173) * waveH / 10, i * waveD + waveD, waveY + sin(i * 173) * waveH / 10);
+                }
+                vertex(600, 0);
+                vertex(0, 0);
+                endShape();
+            };
+            
+            // Basic scene
+            function basicScene(name) {
+                textAlign(CENTER, CENTER);
+                background(0, 10, 30);
+                
+                drawWaves(140, 120, 7);
+                drawWaves(360, 120, 7);
+                
+                textFont(fonts[0], 40);
+                fill(255, 255, 255, 80);
+                text("~=:: " + name + " ::=~", 300, 103);
+                fill(200, 180, 100);
+                text("~=:: " + name + " ::=~", 300, 100);
+                
+                buttons.back.pack();
+            };
+            
+            // Texture
+            var circleTexture = (function() {
+                circleTexture = [];
+                
+                for (var i = 0; i < 100; i++) {
+                    circleTexture.push({x : random(width), y : random(-height, height), color : random(10)});
+                }
+                
+                return circleTexture;
+            })();
+            
+            // Rain
+            var rain = (function() {
+                rain = {};
+                
+                // Rain and snow lists
+                rain.rain = (function() {
+                    rain.rain = [];
+                    for (var i = 0; i < 50; i++) {
+                        rain.rain.push({x : random(width), y : random(height), speed : random(10, 15)});
+                    }
+                    return rain.rain;
+                })();
+                
+                // Draws rain
+                rain.drawRain = function() {
+                    noStroke();
+                    fill(200, 200, 200, 40);
+                    for (var i = 0; i < this.rain.length; i++) {
+                        this.rain[i].y += this.rain[i].speed;
+                        if (this.rain[i].y > height) {
+                            this.rain[i].y = -20;
+                            this.rain[i].x = random(width);
+                            this.rain[i].speed = random(10, 15);
+                        }
+                        rect(this.rain[i].x, this.rain[i].y, 2, 20, 1);
+                    }
+                };
+                
+                return rain;
+            })();
+            
+            // Resets the game
+            function resetGame() {
+                gems = [];
+                level = 0;
+                player.newGame();
+                generateMobs();
+                base.reset();
+                buttons.upgradeMetal.txt = "METAL: COPPER";
+                buttons.upgradeBlade.txt = "BLADE: Lv. 1";
+                buttons.upgradeHandle.txt = "HANDLE: Lv. 1";
+                buttons.upgradePower1.txt = Object.keys(player.powerUps)[0].toUpperCase();
+                buttons.upgradePower2.txt = Object.keys(player.powerUps)[1].toUpperCase();
+                buttons.upgradePower3.txt = Object.keys(player.powerUps)[2].toUpperCase();
+                buttons.upgradePower4.txt = Object.keys(player.powerUps)[3].toUpperCase();
+                for (var i = 0; i < towers.length; i++) {
+                    towers[i].reset();
+                }
+            };
+            
+            // Makes a new level
+            function newLevel() {
+                player.reset();
+                generateMobs();
+                base.reset();
+            };
+            
+            // Draws the base
+            function drawBase() {
+                fill(50, 50, 55);
+                strokeWeight(10);
+                stroke(60, 60, 60);
+                rect(100, 500, 400, 105);
+                for (var i = 0; i < walls.length; i++) {
+                    walls[i].display();
+                }
+                
+                fill(255, 255, 245, 50);
+                quad(180, 600, 420, 600, 350, 530, 250, 530);
+                        
+                fill(0, 0, 30);
+                arc(300, 495, 100, 40, 0, 180);
+                
+                fill(100, 100, 105);
+                rect(260, 560, 80, 8);
+                fill(lerpColor(color(255, 0, 0), color(0, 255, 0), base.health / 100));
+                rect(260, 560, map(constrain(base.health, 0, 100), 0, 100, 0, 80), 8);
+                
+                for (var i = 0; i < towers.length; i++) {
+                    towers[i].pack();
+                }
+            };
+            
+            // Game scene
+            function game() {
+                groundColor = groundColors[level % groundColors.length];
+                background(groundColor);
+                noStroke();
+                
+                pushMatrix();
+                camera.pack();
+                
+                for (var i = 0; i < circleTexture.length; i++) {
+                    if (circleTexture[i].y + camera.y > -75 && circleTexture[i].y + camera.y < height + 75) {
+                        fill(lerpColor(groundColor, color(0, 0, 0), circleTexture[i].color / 80));
+                        ellipse(circleTexture[i].x, circleTexture[i].y, 150, 150);
+                    }
+                }
+                
+                image(grid, 0, 0);
+                image(grid, 0, -600);
+                
+                for (var i = gems.length - 1; i >= 0; i--) {
+                    gems[i].pack();
+                    if (gems[i].dead) {
+                        gems.splice(i, 1);
+                    }
+                }
+                
+                for (var i = mobs.length - 1; i >= 0; i--) {
+                    mobs[i].pack();
+                    if (mobs[i].health <= 0) {
+                        for (var j = 0; j < mobs[i].select + Math.floor(random(2)) + Math.floor(random(player.powerUps.looter)); j++) {
+                            gems.push(new Gem(mobs[i].x, mobs[i].y));
+                        }
+                        mobs.splice(i, 1);
+                    }
+                }
+                
+                player.pack();
+                
+                drawBase();
+                popMatrix();
+                
+                noStroke();
+                player.drawStats();
+                
+                if (base.health <= 0 || mobs.length === 0) {
+                    sceneChanger.reset(after);
+                }
+            };
+            
+            // Menu scene
+            function menu() {
+                background(0, 10, 30);
+                noStroke();
+                titlePos.x += smooth(titlePos.x, 0, 8);
+                titlePos.h += smooth(titlePos.h, 1, 8);
+                
+                fill(10, 30, 50);
+                ellipse(300, 500, 1000, 300);
+                fill(50, 70, 60, 50);
+                ellipse(300, 500, 900, 250);
+                for (var i = 0; i < 7; i++) {
+                    fill(0, 0, 50, 80);
+                    rect(-5, 400 + i * 30, 205 + sin(i * 273) * 100, 30, 15);
+                    fill(255, 255, 245, 10);
+                    rect(400 - sin(i * 237) * 100, 400 + i * 30, 205 + sin(i * 237) * 100, 30, 15);
+                }
+                tree(80, 215, 125);
+                tree(200, 230, 100);
+                tree(280, 195, 130);
+                tree(430, 210, 120);
+                tree(540, 245, 105);
+                
+                drawMob(180, 310, 100, "front", 180, color(0, 0, 0), 3);
+                drawMob(250, 315, 70, "front", 180, color(100, 70, 50), 2);
+                drawMob(150, 340, 80, "front", 180, color(100, 100, 105), 1);
+                drawMob(200, 360, 60, "front", 180, color(0, 130, 20), 0);
+                
+                for (var i = 0; i < squares.length; i++) {
+                    fill(255, 255, 255, squares[i].opac);
+                    pushMatrix();
+                    translate(squares[i].x, squares[i].y);
+                    rotate(45);
+                    rect(-squares[i].size / 2, -squares[i].size / 2, squares[i].size, squares[i].size);
+                    popMatrix();
+                    squares[i].y -= squares[i].yMove;
+                    squares[i].opac -= 0.1;
+                    if (squares[i].opac <= 0) {
+                        squares[i].y = 640;
+                        squares[i].yMove = random(1, 2);
+                        squares[i].opac = random(20, 40);
+                    }
+                }
+                
+                title(300, 100);
+                fill(255, 255, 255, 120);
+                
+                fill(255, 255, 245, 30);
+                quad(30, -30, -30, 30, 570, 630, 630, 570);
+                quad(155, -15, 105, -15, 735, 615, 765, 585);
+                
+                textAlign(RIGHT, BOTTOM);
+                textFont(fonts[1], 10);
+                fill(255, 255, 255, 130);
+                text("©" + getYearStr(2019) + " AmsR Ghost", 590, 590);
+                buttons.play.pack();
+                buttons.about.pack();
+                buttons.monsters.pack();
+                
+                noStroke();
+                fill(0, 0, 20, 50);
+                ellipse(470, 510, 100, 30);
+                
+                pushMatrix();
+                translate(460, 430);
+                rotate(sin(frameCount * 2) * 5);
+                drawSword(50, 120, 130, 100, 3, 6, 4);
+                popMatrix();
+                drawPlayer(460, 430, 100, "front", 0, sin(frameCount * 2) * 5, -sin(frameCount * 2) * 5);
+            };
+            
+            // About scene
+            function about() {
+                basicScene("ABOUT");
+                textSize(25);
+                textLeading(15);
+                text("This game was made in 2019\nby AmsR Ghost.\n\nIt was started with the sword designs\nin March, and was finished in May (Came out in June).\nFurther updates came in September and January.", 300, 300);
+            };
+            
+            // Monsters scene
+            function monsters() {
+                basicScene("MONSTERS");
+                
+                noStroke();
+                fill(255, 255, 255, 50);
+                pushMatrix();
+                translate(300, 250);
+                rotate(45);
+                rect(-70, -70, 140, 140, 20);
+                popMatrix();
+                
+                monsterFade += smooth(monsterFade, 2, 8);
+                drawMob(300, 250, mobInfo[curInfo].size * monsterFade, "top", 180, mobInfo[curInfo].color, curInfo);
+                
+                fill(255, 255, 255);
+                textSize(30);
+                text("- " + mobInfo[curInfo].name + " -\nSpeed: " + mobInfo[curInfo].speed + "\nHealth: " + mobInfo[curInfo].health + "\nDamage: " + mobInfo[curInfo].damage, 300, 430);
+                
+                buttons.left.pack();
+                buttons.right.pack();
+            };
+            
+            // Wave info
+            var isNewGame = false;
+            function before() {
+                if (isNewGame) {
+                    level ++;
+                    newLevel();
+                    isNewGame = false;
+                }
+                background(60, 30, 70);
+                
+                drawWaves(140, 120, 7);
+                drawWaves(360, 120, 7);
+                
+                textAlign(CENTER, CENTER);
+                textFont(fonts[0], 50);
+                fill(255, 255, 255, 80);
+                text("~=~:: Mob units ::~=~", 300, 103);
+                fill(200, 180, 100);
+                text("~=~:: Mob units ::~=~", 300, 100);
+                
+                let extension = "are";
+                if (mobTypes.length === 1 && mobTypes[0].amount === 1) {
+                    extension = "is";
+                }
+                
+                textSize(30);
+                text("Looks like there " + extension , 300, 200);
+                fill(0, 0, 50, 50);
+                text("Click to continue", 300, 555);
+                fill(200, 180, 100);
+                text("Click to continue", 300, 550);
+                for (var i = 0; i < mobTypes.length; i++) {
+                    let groupType = mobTypes[i].amount > 1 ? mobTypes[i].amount : "a single";
+                    let ending = mobTypes[i].amount > 1 ? "s" : "";
+                    text(groupType + " level " + (mobTypes[i].level + 1) + " " + mobTypes[i].name + ending, 300, 250 + i * 30);
+                }
+                
+                if (click) {
+                    sceneChanger.reset(game);
+                }
+            };
+            
+            // After a level is over
+            var message = "";
+            var fade = 0;
+            var drawInfo = function(txt, x, y) {
+                noStroke();
+                textAlign(CENTER, CENTER);
+                textSize(20);
+                fade += smooth(fade, 255, 8);
+                fill(0, 0, 50, fade / 2);
+                rect(x, y, 200, 30);
+                fill(255, 255, 255, fade);
+                text(txt, x + 100, y + 15);
+            };
+            function after() {
+                if (base.health <= 0) {
+                    basicScene("Game Over");
+                    
+                    rain.drawRain();
+                    
+                    fill(255, 255, 255);
+                    textSize(30);
+                    text("They were too strong...", 300, 275);
+                    textSize(40);
+                    text("Final score: " + (level + 1), 300, 325);
+                } else {
+                    basicScene("Level Complete!");
+                    drawSword(400, 170, 90, 160, player.metalLevel, player.bladeLevel, player.handleLevel);
+                    fill(255, 255, 255);
+                    textSize(30);
+                    text("Everything costs 50 gems", 300, 250);
+                    textSize(20);
+                    textAlign(LEFT, TOP);
+                    text("Gems: " + player.coins, 5, 5);
+                    buttons.cont.pack();
+                    buttons.upgradeMetal.pack();
+                    buttons.upgradeBlade.pack();
+                    buttons.upgradeHandle.pack();
+                    buttons.upgradePower1.pack();
+                    buttons.upgradePower2.pack();
+                    buttons.upgradePower3.pack();
+                    buttons.upgradePower4.pack();
+                    if (buttons.upgradeMetal.check()) {
+                        drawInfo("Increase Health", buttons.upgradeMetal.x + buttons.upgradeMetal.w / 2 - 100, buttons.upgradeMetal.y + 50);
+                    } else if (buttons.upgradeBlade.check()) {
+                        drawInfo("Increase Damage", buttons.upgradeBlade.x + buttons.upgradeBlade.w / 2 - 100, buttons.upgradeBlade.y + 50);
+                    } else if (buttons.upgradeHandle.check()) {
+                        drawInfo("Increase Drawback", buttons.upgradeHandle.x + buttons.upgradeHandle.w / 2 - 100, buttons.upgradeHandle.y + 50);
+                    } else if (buttons.upgradePower1.check()) {
+                        drawInfo("Increase Speed", buttons.upgradePower1.x + buttons.upgradePower1.w / 2 - 100, buttons.upgradePower1.y + 25);
+                    } else if (buttons.upgradePower2.check()) {
+                        drawInfo("Increase Loot", buttons.upgradePower2.x + buttons.upgradePower2.w / 2 - 100, buttons.upgradePower2.y + 25);
+                    } else if (buttons.upgradePower3.check()) {
+                        drawInfo("Increase Healing", buttons.upgradePower3.x + buttons.upgradePower3.w / 2 - 100, buttons.upgradePower3.y + 25);
+                    } else if (buttons.upgradePower4.check()) {
+                        drawInfo("Increase Attacks", buttons.upgradePower4.x + buttons.upgradePower4.w / 2 - 100, buttons.upgradePower4.y + 25);
+                    } else {
+                        fade += smooth(fade, 0, 8);
+                    }
+                }
+            };
+            
+            // My logo
+            function greenGhostLogo(x, y, size) {
+                noStroke();
+                pushMatrix();
+                translate(x, y);
+                scale(size / 600, size / 600);
+                translate(0, -200);
+                beginShape();
+                vertex(-270, 20);
+                bezierVertex(-600, 250, -700, 600, -50, 600);
+                vertex(-125, 400);
+                vertex(-255, 480);
+                bezierVertex(-305, 430, -395, 280, -205, 180);
+                endShape();
+                beginShape();
+                vertex(270, 20);
+                bezierVertex(600, 250, 700, 600, 50, 600);
+                vertex(125, 400);
+                vertex(255, 480);
+                bezierVertex(305, 430, 395, 280, 205, 180);
+                endShape();
+                beginShape();
+                vertex(0, 600);
+                vertex(225, 0);
+                curveVertex(0, -80, -225, 0);
+                endShape();
+                popMatrix();
+            };
+            
+            // Draws logo
+            logoTime = 0;
+            var logoPos = [1, 1, 0, []];
+            for (var i = 0; i < 50; i++) {
+                logoPos[3].push({x : 300, y : 300, angle : random(360), size : random(5, 20), speed : random(1, 6)});
+            }
+            function logo() {
+                logoTime ++;
+                background(0, 30, 10);
+                drawWaves(140, 120, 7);
+                drawWaves(360, 120, 7);
+                if (logoPos[1] > 95) {
+                    fill(200, 255, 200, 30);
+                    for (var i = 0; i < logoPos[3].length; i++) {
+                        logoPos[3][i].x += cos(logoPos[3][i].angle) * logoPos[3][i].speed;
+                        logoPos[3][i].y += sin(logoPos[3][i].angle) * logoPos[3][i].speed;
+                        logoPos[3][i].size -= 0.1;
+                        if (logoPos[3][i].size <= 0) {
+                            logoPos[3][i].x = 300;
+                            logoPos[3][i].y = 300;
+                            logoPos[3][i].angle = random(360);
+                            logoPos[3][i].size = random(5, 20);
+                            logoPos[3][i].speed = random(1, 6);
+                        }
+                        ellipse(logoPos[3][i].x, logoPos[3][i].y, logoPos[3][i].size, logoPos[3][i].size);
+                    }
+                }
+                pushMatrix();
+                translate(300, 300);
+                scale(logoPos[0] / 100, logoPos[1] / 100);
+                fill(0, 0, 50, 100);
+                greenGhostLogo(5, 5, 150);
+                fill(70, 170, 80);
+                greenGhostLogo(0, 0, 150);
+                popMatrix();
+                logoPos[0] += smooth(logoPos[0], 100, 10);
+                if (logoPos[0] > 95) {
+                    logoPos[1] += smooth(logoPos[1], 100, 10);
+                }
+                if (logoPos[1] > 95) {
+                    logoPos[2] += 0.1;
+                }
+                textFont(fonts[3], 50);
+                textAlign(CENTER, CENTER);
+                fill(0, 0, 50, 100);
+                text("AmsR GHOST\nPRESENTS".substring(0, logoPos[2]), 305, 505);
+                noFill();
+                stroke(0, 130, 40);
+                strokeWeight(1.5);
+                text("AmsR GHOST\nPRESENTS".substring(0, logoPos[2]), 300, 500);
+                if (click || logoTime > 300) {
+                    sceneChanger.reset(menu);
+                }
+            };
+            
+            scene = logo;
+            
+            // Puts it all together.
+            draw = function() {
+                scene();
+                sceneChanger.pack();
+                click = false;
+                cursor(overButton ? "pointer" : "default");
+                overButton = false;
+            };
+            
+            // Handles clicks
+            mouseClicked = function() {
+                click = true;
+            };
+            
+            // Key presses
+            keyPressed = function() {
+                keys[keyCode] = true;
+            };
+            
+            keyReleased = function() {
+                keys[keyCode] = false;
+            };
+        </script>
+    </body>
+</html>
+
+<!-- 
+
+      ************************************************************
+      
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
